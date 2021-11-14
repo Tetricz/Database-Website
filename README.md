@@ -6,7 +6,7 @@ User: dbqbdkgv<br>
 Password: SZwJ4LWOJ-pWOjpGt0S0z214wUfmdkwq<br>
 
 ```
-psql -h fanny.db.elephantsql.com -d svexfiil -U svexfiil -W 
+psql -h fanny.db.elephantsql.com -d dbqbdkgv -U dbqbdkgv -W 
 ```
 
 ## Node Information
