@@ -1,5 +1,5 @@
-create table officeshift (
+create table flightshift (
 	social_security_num VARCHAR(50),
-    office_id INT,
+    flight_id INT,
     hours_worked INT
 );
