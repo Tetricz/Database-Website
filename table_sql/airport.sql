@@ -5,7 +5,7 @@ create table airport (
 );
 
 insert into airport (airport_code, city) values ('PEK', 'Beijing', 'Beijing Capital International Airport');
-insert into airport (airport_code, city) values ('SVO', 'Moscow', 'Sheremetyevo International Airport');
+insert into airport (airport_code, city) values ('SYD', 'Sydney', 'Sydney Airport');
 insert into airport (airport_code, city) values ('LAX', 'Los Angeles', "Los Angeles International Airport");
 insert into airport (airport_code, city) values ('CDG', 'Paris', 'Charles de Gaulle Airport');
 insert into airport (airport_code, city) values ('GRU', 'Sao Paulo', 'Guarulhos International Airport');
