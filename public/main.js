@@ -8,29 +8,53 @@ const setDemos = (data) => {
 
 // function edit demo (connected with updateDemo below)
 const editDemo = (id) => {
-  const key = demos.filter(demo => demo.key === id)[0].key; //get key in row edit was pressed
-  const descrip = demos.filter(demo => demo.key === id)[0].description; //get description row edit was pressed
-  document.querySelector('#edited-key').value = key;
-  document.querySelector('#edited-description').value = descrip;
-  document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
+  const flight_id = demos.filter(demo => demo.flight_id === id)[0].flight_id;
+  const pilot = demos.filter(demo => demo.flight_id === id)[0].pilot; 
+  const copilot = demos.filter(demo => demo.flight_id === id)[0].pilot; 
+  const flight_attendant_1 = demos.filter(demo => demo.flight_id === id)[0].flight_attendant_1;
+  const flight_attendant_2 = demos.filter(demo => demo.flight_id === id)[0].flight_attendant_2; 
+  const flight_attendant_3 = demos.filter(demo => demo.flight_id === id)[0].flight_attendant_3; 
+  const flight_attendant_4 = demos.filter(demo => demo.flight_id === id)[0].flight_attendant_4;
+  document.querySelector('#edit-demo-label').innerHTML = "Assign Crew for Flight " + flight_id;
+  document.querySelector('#edited-pilot').value = pilot;
+  document.querySelector('#edited-copilot').value = copilot;
+  document.querySelector('#edited-flightattendant1').value = flight_attendant_1;
+  document.querySelector('#edited-flightattendant2').value = flight_attendant_2;
+  document.querySelector('#edited-flightattendant3').value = flight_attendant_3;
+  document.querySelector('#edited-flightattendant4').value = flight_attendant_4;
+  //document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
 }
 
 // function to display demos
 const displayDemos = () => {
+  /*
   demos.sort((a, b) => { //sort in ascending order
     return a.key - b.key;
   });
+  */
   const demoTable = document.querySelector('#demo-table');
 
   // display all demos by modifying the HTML in "demo-table", adds edit and delete buttons as well
   let tableHTML = "";
   demos.map(demo =>{
+    arrival_time = demo.scheduled_arrival_time
+    arrival_time = arrival_time.replace(/T|Z|.000/gi, ' ')
+    departure_time = demo.scheduled_departure_time
+    departure_time = departure_time.replace(/T|Z|.000/gi, ' ')
     tableHTML +=
-    `<tr key=${demo.key}>
-    <th>${demo.key}</th>
-    <th>${demo.description}</th>
-    <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo(${demo.key})">Edit</button></th>
-    <th><button class="btn btn-danger" type="button" onclick="deleteDemo(${demo.key})">Delete</button></th>
+    `<tr Flight ID=${demo.flight_id}>
+    <th>${demo.flight_id}</th>
+    <th>${demo.departure_airport}</th>
+    <th>${demo.arrival_airport}</th>
+    <th>${demo.pilot}</th>
+    <th>${demo.copilot}</th>
+    <th>${departure_time}</th>
+    <th>${arrival_time}</th>
+    <th>${demo.flight_attendant_1}</th>
+    <th>${demo.flight_attendant_2}</th>
+    <th>${demo.flight_attendant_3}</th>
+    <th>${demo.flight_attendant_4}</th>
+    <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo('${demo.flight_id}')">Edit</button></th>
     </tr>`;
   })
   demoTable.innerHTML = tableHTML;
@@ -61,7 +85,7 @@ async function selectDemos() {
     console.log(err.message);
   }
 }
-
+/*
 // insert a new demo
 async function insertDemo() {
   // read the demo description from input
@@ -92,7 +116,7 @@ async function insertDemo() {
     console.log(err.message);
   }
 }
-
+/*
 // delete a demo by id
 async function deleteDemo(id) {
   try {
@@ -139,3 +163,4 @@ async function updateDemo(id) {
     console.log(err.message);
   }
 }
+*/

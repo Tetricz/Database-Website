@@ -1,5 +1,5 @@
 create table airport (
-	airport_code VARCHAR(3),
+	airport_code VARCHAR(3) PRIMARY KEY,
     city VARCHAR(50),
     airport_name VARCHAR(50)
 );

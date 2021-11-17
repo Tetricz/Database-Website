@@ -1,5 +1,5 @@
 create table office (
-	office_num INT,
+	office_num INT PRIMARY KEY,
     airport_code VARCHAR(3)
 );
 

@@ -1,5 +1,5 @@
 CREATE TABLE payment (
-	social_security_num VARCHAR(50),
+	social_security_num VARCHAR(50) PRIMARY KEY,
     job VARCHAR(20),
     total_hours INT,
     overtime_hours INT,

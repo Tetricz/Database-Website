@@ -16,7 +16,7 @@ app.use(express.json());      //req.body
 //get all demo
 app.get('/demos', async(req, res)=>{
   try{
-    const allDemos = await pool.query(`SELECT * FROM demo`);
+    const allDemos = await pool.query(`SELECT * FROM flightassignment`);
     res.json(allDemos.rows);
     // console.log(allDemos);
   } catch(err){
@@ -28,9 +28,8 @@ app.get('/demos', async(req, res)=>{
 app.get('/demos/:id', async(req, res)=>{
   try{
     const { id } = req.params;
-    const demo = await pool.query(`SELECT * FROM demo 
-                                   WHERE key = $1`, 
-      [id]);
+    const demo = await pool.query(`SELECT * FROM flightassignment 
+                                   WHERE flightid = $1`, [id]);
     res.json(demo.rows);
   } catch(err){
     console.log(err.message);

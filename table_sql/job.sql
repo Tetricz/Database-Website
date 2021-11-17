@@ -1,5 +1,5 @@
 create table job (
-    job VARCHAR(20),
+    job VARCHAR(20) PRIMARY KEY,
     payrate DECIMAL (5, 2),
     overtime_payrate DECIMAL (5, 2),
     medical_benefits BOOLEAN,

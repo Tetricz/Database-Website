@@ -21,7 +21,6 @@
   </div>
 
   <!-- demo insert input box and add button -->
-  <!--
   <div class="input-group mb-3" id="input-todo">
     <input type="number" class="form-control" placeholder="primary key" id="demo-key">
     <input type="text" class="form-control" placeholder="description" id="demo-description">
@@ -29,25 +28,16 @@
       <button class="btn btn-primary" type="button" onclick="insertDemo()">Add</button>
     </div>
   </div>
-  -->
   <!-- end of insert form -->
 
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
     <thead>
       <tr>
-        <th>Flight ID</th>
-        <th>Departure Airport</th>
-        <th>Arrival Airport</th>
-        <th>Pilot</th>
-        <th>Copilot</th>
-        <th>Scheduled Departure Time</th>
-        <th>Scheduled Arrival Time</th>
-        <th>Flight Attendant 1</th>
-        <th>Flight Attendant 2</th>
-        <th>Flight Attendant 3</th>
-        <th>Flight Attendant 4</th>
+        <th>Key</th>
+        <th>Description</th>
         <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <!-- add todos in tbody by modying the HTML in main.js -->
@@ -61,23 +51,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="edit-demo-label">Assign Flight Crew</h5>
+          <h5 class="modal-title" id="edit-demo-label">Edit Description</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">Pilot</div>
-        <input type="text" class="form-control modal-body" id="edited-pilot">
-        <div class="modal-body">Copilot</div>
-        <input type="text" class="form-control modal-body" id="edited-copilot">
-        <div class="modal-body">Flight Attendant 1</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant1">
-        <div class="modal-body">Flight Attendant 2</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant2">
-        <div class="modal-body">Flight Attendant 3</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant3">
-        <div class="modal-body">Flight Attendant 4</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant4">
+        <input type="number" class="form-control modal-body" id="edited-key">
+        <input type="text" class="form-control modal-body" id="edited-description">
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="save-edit-demo">Save changes</button>
@@ -86,7 +66,7 @@
     </div>
   </div>
   <!-- end of model -->
-  
+
 </body>
 
 <script src="main.js"></script> <!--includes main.js in the html file-->

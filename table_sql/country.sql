@@ -1,5 +1,5 @@
 create table country (
-	country VARCHAR(50),
+	country VARCHAR(50) PRIMARY KEY,
     taxes DEC(10,2)
 );
 
