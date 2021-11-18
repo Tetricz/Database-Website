@@ -20,18 +20,6 @@
     <h2>Assign Shifts</h2>
   </div>
 
-  <!-- demo insert input box and add button -->
-  <!--
-  <div class="input-group mb-3" id="input-todo">
-    <input type="number" class="form-control" placeholder="primary key" id="demo-key">
-    <input type="text" class="form-control" placeholder="description" id="demo-description">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="button" onclick="insertDemo()">Add</button>
-    </div>
-  </div>
-  -->
-  <!-- end of insert form -->
-
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
     <thead>
@@ -59,7 +47,7 @@
   <!-- the popup modal, used for update the demo description -->
   <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" id = "edit-form">
         <div class="modal-header">
           <h5 class="modal-title" id="edit-demo-label">Assign Flight Crew</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -67,17 +55,23 @@
           </button>
         </div>
         <div class="modal-body">Pilot</div>
-        <input type="text" class="form-control modal-body" id="edited-pilot">
+        <select id="edited-pilot" class="form-select" aria-label="Default select example">
+        </select>
         <div class="modal-body">Copilot</div>
-        <input type="text" class="form-control modal-body" id="edited-copilot">
+        <select id="edited-copilot" class="form-select" aria-label="Default select example">
+        </select>
         <div class="modal-body">Flight Attendant 1</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant1">
+        <select id="edited-flightattendant1" class="form-select" aria-label="Default select example">
+        </select>
         <div class="modal-body">Flight Attendant 2</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant2">
+        <select id="edited-flightattendant2" class="form-select" aria-label="Default select example">
+        </select>
         <div class="modal-body">Flight Attendant 3</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant3">
+        <select id="edited-flightattendant3" class="form-select" aria-label="Default select example">
+        </select>
         <div class="modal-body">Flight Attendant 4</div>
-        <input type="text" class="form-control modal-body" id="edited-flightattendant4">
+        <select id="edited-flightattendant4" class="form-select" aria-label="Default select example">
+        </select>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="save-edit-demo">Save changes</button>
@@ -86,7 +80,7 @@
     </div>
   </div>
   <!-- end of model -->
-  
+
 </body>
 
 <script src="main.js"></script> <!--includes main.js in the html file-->
