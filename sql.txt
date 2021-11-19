@@ -1,4 +1,10 @@
-T
-'1A'
-[object Object]
-[object Object]
+shift_id = $1
+shift_id = $1
+1
+1
+UPDATE officeshift SET ground_worker_1 = $2, ground_worker_2 = $3, office_worker_1 = $4, office_worker_2 = $5,
+    WHERE shift_id = 1
+UPDATE officeshift SET ground_worker_1 = N/A, ground_worker_2 = 689-20-0248, office_worker_1 = N/A, office_worker_2 = N/A,
+    WHERE shift_id = 1
+UPDATE officeshift SET ground_worker_1 = 689-20-0248, ground_worker_2 = 158-61-5318, office_worker_1 = 422-04-9876, office_worker_2 = 248-07-6582,
+    WHERE shift_id = 1

@@ -24,17 +24,14 @@
   <table class="table mt-5 text-center" id="demo-list">
     <thead>
       <tr>
-        <th>Flight ID</th>
-        <th>Departure Airport</th>
-        <th>Arrival Airport</th>
-        <th>Pilot</th>
-        <th>Copilot</th>
-        <th>Scheduled Departure Time</th>
-        <th>Scheduled Arrival Time</th>
-        <th>Flight Attendant 1</th>
-        <th>Flight Attendant 2</th>
-        <th>Flight Attendant 3</th>
-        <th>Flight Attendant 4</th>
+        <th>Shift ID</th>
+        <th>Office ID</th>
+        <th>Shift Start</th>
+        <th>Shift End</th>
+        <th>Ground Worker 1</th>
+        <th>Ground Worker 2</th>
+        <th>Office Worker 1</th>
+        <th>Office Worker 2</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -49,28 +46,22 @@
     <div class="modal-dialog">
       <div class="modal-content" id = "edit-form">
         <div class="modal-header">
-          <h5 class="modal-title" id="edit-demo-label">Assign Flight Crew</h5>
+          <h5 class="modal-title" id="edit-demo-label">Assign Shift Office ID</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">Pilot</div>
-        <select id="edited-pilot" class="form-select" aria-label="Default select example">
+        <div class="modal-body">Ground Worker 1</div>
+        <select id="edited-groundworker1" class="form-select" aria-label="Default select example">
         </select>
-        <div class="modal-body">Copilot</div>
-        <select id="edited-copilot" class="form-select" aria-label="Default select example">
+        <div class="modal-body">Ground Worker 2</div>
+        <select id="edited-groundworker2" class="form-select" aria-label="Default select example">
         </select>
-        <div class="modal-body">Flight Attendant 1</div>
-        <select id="edited-flightattendant1" class="form-select" aria-label="Default select example">
+        <div class="modal-body">Office Worker 1</div>
+        <select id="edited-officeworker1" class="form-select" aria-label="Default select example">
         </select>
-        <div class="modal-body">Flight Attendant 2</div>
-        <select id="edited-flightattendant2" class="form-select" aria-label="Default select example">
-        </select>
-        <div class="modal-body">Flight Attendant 3</div>
-        <select id="edited-flightattendant3" class="form-select" aria-label="Default select example">
-        </select>
-        <div class="modal-body">Flight Attendant 4</div>
-        <select id="edited-flightattendant4" class="form-select" aria-label="Default select example">
+        <div class="modal-body">Office Worker 2</div>
+        <select id="edited-officeworker2" class="form-select" aria-label="Default select example">
         </select>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -83,7 +74,7 @@
 
 </body>
 
-<script src="main.js"></script> <!--includes main.js in the html file-->
+<script src="officeshift.js"></script> <!--includes main.js in the html file-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
