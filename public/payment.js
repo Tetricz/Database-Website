@@ -18,6 +18,7 @@ const displayDemos = () => {
   // display all demos by modifying the HTML in "demo-table", adds edit and delete buttons as well
   let tableHTML = "";
   demos.map(demo =>{
+    //updateDemo (`${demo.social_security_num}`, `${demo.normal_hours}`, `${demo.overtime_hours}`, `${demo.taxes}`, `${demo.monthly_salary}`)
     tableHTML +=
     `<tr>
     <th>${demo.social_security_num}</th>
@@ -28,6 +29,7 @@ const displayDemos = () => {
     <th>${demo.overtime_payrate}</th>
     <th>${demo.taxes}</th>
     <th>${demo.monthly_salary}</th>
+    <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="updateDemo('${demo.social_security_num}',${demo.normal_hours},${demo.overtime_hours},${demo.taxes},${demo.monthly_salary})">Update</button></th>
     </tr>`;
   })
   demoTable.innerHTML = tableHTML;
@@ -60,7 +62,7 @@ async function selectDemos() {
 }
 
 // update a demo description
-async function updateDemo(id) {
+async function updateDemo(id, normal_hours, overtime_hours, taxes, monthly_salary) {
   // console.log(key)
   // console.log(description);
 
@@ -68,21 +70,12 @@ async function updateDemo(id) {
     // update a demo from "http://localhost:5000/demos/${id}", with "PUT" method
     // connect to heroku, remove localhost:port
       const body = {normal_hours, overtime_hours, taxes, monthly_salary};
-        
       const response = await fetch(`http://localhost:5000/payments/${id}`, {
       // const response = await fetch(`/demos/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)
       })
-      
-      let demo = demos.find(t => t.id === id);
-      demo.normal_hours = normal_hours;
-      demo.overtime_hours = overtime_hours;
-      demo.taxes = taxes;
-      demo.monthly_salary = monthly_salary;
-
-      displayDemos();  
   } catch (err) {
     console.log(err.message);
   }
