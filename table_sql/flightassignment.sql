@@ -21,18 +21,18 @@ create table flightassignment (
 );
 
 --Day 1--
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('1A','GRU', 'LAX', '2021-11-01 06:25+00'::timestamptz, '2021-11-01 19:25+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('2A','LAX', 'CDG', '2021-11-01 09:55+00'::timestamptz, '2021-11-01 21:55+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('3A','CDG', 'PEK', '2021-11-01 08:00+00'::timestamptz, '2021-11-01 19:00+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('4A','PEK', 'SYD', '2021-11-01 00:10+00'::timestamptz, '2021-11-01 11:10+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('5A','SYD', 'GRU', '2021-11-01 00:00+00'::timestamptz, '2021-11-01 17:00+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('01A','GRU', 'LAX', '2021-11-01 06:25+00'::timestamptz, '2021-11-01 19:25+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('02A','LAX', 'CDG', '2021-11-01 09:55+00'::timestamptz, '2021-11-01 21:55+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('03A','CDG', 'PEK', '2021-11-01 08:00+00'::timestamptz, '2021-11-01 19:00+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('04A','PEK', 'SYD', '2021-11-01 00:10+00'::timestamptz, '2021-11-01 11:10+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('05A','SYD', 'GRU', '2021-11-01 00:00+00'::timestamptz, '2021-11-01 17:00+00'::timestamptz);
 
 --Day 2--
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('1B','LAX', 'GRU', '2021-11-02 02:00+00'::timestamptz, '2021-11-02 15:00+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('2B','CDG', 'LAX', '2021-11-02 06:00+00'::timestamptz, '2021-11-02 18:00+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('3B','PEK', 'CDG', '2021-11-02 01:00+00'::timestamptz, '2021-11-02 12:00+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('4B','SYD', 'PEK', '2021-11-02 05:55+00'::timestamptz, '2021-11-02 16:55+00'::timestamptz);
-insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('5B','GRU', 'SYD', '2021-11-02 06:00+00'::timestamptz, '2021-11-02 23:00+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('01B','LAX', 'GRU', '2021-11-02 02:00+00'::timestamptz, '2021-11-02 15:00+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('02B','CDG', 'LAX', '2021-11-02 06:00+00'::timestamptz, '2021-11-02 18:00+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('03B','PEK', 'CDG', '2021-11-02 01:00+00'::timestamptz, '2021-11-02 12:00+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('04B','SYD', 'PEK', '2021-11-02 05:55+00'::timestamptz, '2021-11-02 16:55+00'::timestamptz);
+insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('05B','GRU', 'SYD', '2021-11-02 06:00+00'::timestamptz, '2021-11-02 23:00+00'::timestamptz);
 
 --Day 3--
 insert into flightassignment (flight_id, departure_airport, arrival_airport, scheduled_departure_time, scheduled_arrival_time) values ('11C','CDG', 'LAX', '2021-11-03 09:00+00'::timestamptz, '2021-11-03 21:00+00'::timestamptz);
