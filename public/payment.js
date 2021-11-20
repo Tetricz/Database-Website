@@ -24,11 +24,11 @@ const displayDemos = () => {
     <th>${demo.social_security_num}</th>
     <th>${demo.job}</th>
     <th>${demo.normal_hours}</th>
-    <th>${demo.payrate}</th>
+    <th>\$${demo.payrate.toFixed(2)}</th>
     <th>${demo.overtime_hours}</th>
-    <th>${demo.overtime_payrate}</th>
-    <th>${demo.taxes}</th>
-    <th>${demo.monthly_salary}</th>
+    <th>\$${demo.overtime_payrate.toFixed(2)}</th>
+    <th>\$${demo.taxes.toFixed(2)}</th>
+    <th>\$${demo.monthly_salary.toFixed(2)}</th>
     <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="updateDemo('${demo.social_security_num}',${demo.normal_hours},${demo.overtime_hours},${demo.taxes},${demo.monthly_salary})">Update</button></th>
     </tr>`;
   })
