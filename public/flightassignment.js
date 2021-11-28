@@ -97,7 +97,7 @@ async function selectDemos() {
   // use try... catch... to catch error
   try {
     // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("http://localhost:5000/demos")
+    const response = await fetch("/demos")
     // connect to heroku, remove localhost:port
     // const response = await fetch("/demos")
     const jsonData = await response.json();
@@ -154,7 +154,7 @@ async function updateDemo(id) {
       const body = {pilot: pilot, copilot: copilot, flight_attendant_1: flight_attendant_1, flight_attendant_2: flight_attendant_2, 
         flight_attendant_3: flight_attendant_3, flight_attendant_4: flight_attendant_4};
         
-      const response = await fetch(`http://localhost:5000/demos/${idtemp}`, {
+      const response = await fetch(`/demos/${idtemp}`, {
       // const response = await fetch(`/demos/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
@@ -205,7 +205,7 @@ async function updateDemo(id) {
 async function displaySelectOptions(departure_airport, job) {
   try {
     // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch(`http://localhost:5000/demos/${departure_airport}/${job}`)
+    const response = await fetch(`/demos/${departure_airport}/${job}`)
     // connect to heroku, remove localhost:port
     const jsonData = await response.json();
 

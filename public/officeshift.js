@@ -71,7 +71,7 @@ async function selectDemos() {
   // use try... catch... to catch error
   try {
     // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("http://localhost:5000/officeshifts")
+    const response = await fetch("/officeshifts")
     // connect to heroku, remove localhost:port
     // const response = await fetch("/demos")
     const jsonData = await response.json();

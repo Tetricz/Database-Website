@@ -44,7 +44,7 @@ async function selectDemos() {
   // use try... catch... to catch error
   try {
     // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("http://localhost:5000/payments")
+    const response = await fetch("/payments")
     // connect to heroku, remove localhost:port
     // const response = await fetch("/demos")
     const jsonData = await response.json();
@@ -70,7 +70,7 @@ async function updateDemo(id, normal_hours, overtime_hours, taxes, monthly_salar
     // update a demo from "http://localhost:5000/demos/${id}", with "PUT" method
     // connect to heroku, remove localhost:port
       const body = {normal_hours, overtime_hours, taxes, monthly_salary};
-      const response = await fetch(`http://localhost:5000/payments/${id}`, {
+      const response = await fetch(`/payments/${id}`, {
       // const response = await fetch(`/demos/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
