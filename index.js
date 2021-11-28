@@ -43,6 +43,22 @@ app.get('/officeshifts', async(req, res)=>{
   }
 });
 
+//get all employee information (Peter Dinh)
+app.get('/employee_info', async(req, res)=>{
+  try{
+    const q_string = `SELECT social_security_num, first_name, last_name, email, gender, street_num, city, country, ep.job, current_airport_code, medical_benefits, retirement_benefits FROM employee AS ep
+                      JOIN job AS jb
+                        ON ep.job = jb.job
+                      ORDER BY first_name, last_name`
+    const allDemos = await pool.query(q_string);
+    appendtofile(sqlfile, q_string)
+    res.json(allDemos.rows);
+    // console.log(allDemos);
+  } catch(err){
+    console.log(err.message);
+  }
+});
+
 //get all payments
 app.get('/payments', async(req, res)=>{
   try{
@@ -238,6 +254,29 @@ app.put("/payments/:id", async (req, res) => {
     const q_string = q_string_1 + '\n' + q_string_2 + '\n' + q_string_3
     appendtofile(transfile, q_string)
     res.json({normal_hours, overtime_hours, taxes, monthly_salary})
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//update a employee information by id (Peter Dinh)
+app.put("/employee_info/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { first_name, last_name, email, gender, street_address, city, country, current_airport_code } = req.body;
+
+    const q_string_1 = 'BEGIN' 
+    await pool.query(q_string_1)
+    const q_string_2 = `UPDATE employee SET first_name = $2, last_name = $3, email = $4, gender = $5, street_num = $6, city = $7, country = $8, current_airport_code = $9 
+    WHERE social_security_num = $1`
+    const updateDemo = await pool.query(q_string_2,
+      [id, first_name, last_name, email, gender, street_address, city, country, current_airport_code]);
+    const q_string_3 = 'COMMIT'
+    await pool.query(q_string_3)
+    const q_string = q_string_1 + '\n' + q_string_2 + '\n' + q_string_3
+    appendtofile(transfile, q_string)
+    res.json({first_name, last_name, email, gender, street_address, city, country, current_airport_code})
+
   } catch (err) {
     console.error(err.message);
   }

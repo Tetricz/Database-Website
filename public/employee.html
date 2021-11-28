@@ -1,0 +1,116 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <!-- style file -->
+  <link rel="stylesheet" href="style.css">
+
+  <title>Assign Shifts</title>
+</head>
+
+<body>
+  <!-- Title -->
+  <div id="title">
+    <h2>Employee Info</h2>
+  </div>
+
+  <!-- dynamic table to display todo list -->
+  <table class="table mt-5 text-center" id="demo-list">
+    <thead>
+      <tr>
+        <th>Social Secturity Number</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Job</th>
+        <th>Current Airport Code</th>
+        <th>Medical Benefits</th>
+        <th>Retirement Benefits</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <!-- add todos in tbody by modying the HTML in main.js -->
+    <tbody id="demo-table">
+    </tbody>
+  </table>
+  <!-- End of dynamic table -->
+
+
+  <!-- the popup modal, used for update the demo description -->
+  <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id = "edit-form">
+        <div class="modal-header">
+          <h5 class="modal-title" id="edit-demo-label">Edit Employee Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- <label>Social Security Number</label>
+        <input type="text" class="form-control" id="edited-SSN" placeholder="Enter Social Security Number"> -->
+        
+        <label>First Name</label>
+        <input type="text" class="form-control" id="edited-first-name" placeholder= "Enter First Name">
+
+        <label>Last Name</label>
+        <input type="text" class="form-control" id="edited-last-name" placeholder="Enter Last Name">
+
+        <label>Email</label>
+        <input type="text" class="form-control" id="edited-email" placeholder="Enter Email">
+
+        <label>Gender</label>
+        <input type="text" class="form-control" id="edited-gender" placeholder="Enter Gender">
+
+        <label>Street Address</label>
+        <input type="text" class="form-control" id="edited-street-address" placeholder="Enter Street Address">
+
+        <label>City</label>
+        <input type="text" class="form-control" id="edited-city" placeholder="Enter City">
+
+        <label>Country</label>
+        <input type="text" class="form-control" id="edited-country" placeholder="Enter Country">
+
+        <!-- <label>Job</label>
+        <input type="text" class="form-control" id="edited-job" placeholder="Enter Job"> -->
+
+        <!-- <label>Current Airport Code</label>
+        <input type="text" class="form-control" id="edited-current-airport-code" placeholder="Enter Current Airport Code"> -->
+
+        <label>Choose a car:</label>
+          <select name="Airport_code" id="edited-current-airport-code">
+            <option value="N/A">N/A</option>
+            <option value="PEK">PEK</option>
+            <option value="SYD">SYD</option>
+            <option value="LAX">LAX</option>
+            <option value="CDG">CDG</option>
+            <option value="GRU">GRU</option>
+          </select>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="save-edit-demo">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of model -->
+
+</body>
+
+<script src="employee.js"></script> <!--includes main.js in the html file-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
