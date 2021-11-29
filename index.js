@@ -194,6 +194,20 @@ app.post('/demos', async(req, res)=>{ //call post function from main.js (insert)
     }
   });
 
+//reset the database to initial state
+//uses the files in table_sql to generate the database
+app.post("/reset", async (req, res) => {
+    try {
+      var del_sql = fs.readFileSync('./table_sql/drop_tables.sql').toString()
+      var init_sql = fs.readFileSync('./table_sql/reset_tables.sql').toString()
+      await pool.query(del_sql)
+      await pool.query(init_sql)
+      res.send('Success')
+    } catch (err) {
+      console.log(err)
+    }
+});
+
 //update a flightassignment by flight_id
 app.put("/demos/:id", async (req, res) => {
   try {
@@ -281,6 +295,7 @@ app.put("/employee_info/:id", async (req, res) => {
     console.error(err.message);
   }
 });
+
 
 app.get('/shifts', function(req, res) {
   res.sendFile(__dirname + '/public/officeshift.html')

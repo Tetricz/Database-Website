@@ -64,17 +64,17 @@ insert into flightassignment (flight_id, departure_airport, arrival_airport, sch
 
 
 --Fill pilot, copilot, etc. with N/A instead of null--
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '1A';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '2A';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '3A';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '4A';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '5A';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '01A';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '02A';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '03A';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '04A';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '05A';
 
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '1B';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '2B';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '3B';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '4B';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '5B';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '01B';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '02B';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '03B';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '04B';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '05B';
 
 UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '11C';
 UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '12C';
@@ -98,4 +98,4 @@ UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 =
 UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '22F';
 UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '23F';
 UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '24F';
-UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '25';
+UPDATE flightassignment SET pilot = 'N/A', copilot = 'N/A', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A' WHERE flight_id = '25F';
