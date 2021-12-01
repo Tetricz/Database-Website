@@ -20,6 +20,7 @@ NPM Version:  v7.22.0<br>
 Install node modules
 ```
 npm install
+npm install nodemon
 ```
 
 ## Contributors
