@@ -200,7 +200,7 @@ WHERE flight_id LIKE '${id}';`
     await pool.query('COMMIT')
     transactionquery = `/*\nUpdate '${id}' on flightassignment table.\n The id is Number_ because it updates 2 flights at the same time.\n pilot = '${pilot}', copilot = '${copilot}', \ flight_attendant_1 = '${flight_attendant_1}',\
     flight_attendant_2 = '${flight_attendant_2}', flight_attendant_3 = '${flight_attendant_3}', flight_attendant_4 = '${flight_attendant_4}'\n*/\nBEGIN;\n${transactionquery}\nCOMMIT;\n`
-    await appendtofile(transactions, transactionquery)
+    appendtofile(transactions, transactionquery)
     res.json({pilot, copilot, flight_attendant_1, flight_attendant_2, 
       flight_attendant_3, flight_attendant_4})
   } catch (err) {
@@ -221,7 +221,7 @@ WHERE shift_id = ${id};`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = `/*\nUpdate shift id ${id} on table officeshift with ground_worker_1 = '${ground_worker_1}', ground_worker_2 = '${ground_worker_2}', office_worker_1 = '${office_worker_1}', office_worker_2 = '${office_worker_2}\n*/\nBEGIN;\n${transactionquery}\nCOMMIT;`
-    await appendtofile (transactions, transactionquery)
+    appendtofile (transactions, transactionquery)
     res.json({ground_worker_1, ground_worker_2, office_worker_1, office_worker_2})
   } catch (err) {
     console.error(err.message);
@@ -280,7 +280,7 @@ WHERE social_security_num = '${id}';`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = `/*\nUpdate employee information on employee table where the SSN is ${id}.\n'${first_name}', last_name = '${last_name}', email = '${email}', gender = '${gender}', street_num = '${street_address}', city = '${city}', country = '${country}'\nWith  \n*/BEGIN;\n${transactionquery}\nCOMMIT;`
-    await appendtofile (transactions, transactionquery)
+    appendtofile (transactions, transactionquery)
     res.json({first_name, last_name, email, gender, street_address, city, country})
   } catch (err) {
     console.error(err.message);
