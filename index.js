@@ -198,9 +198,10 @@ WHERE flight_id LIKE '${id}';`
     await pool.query('BEGIN')
     await pool.query(transactionquery);
     await pool.query('COMMIT')
-    transactionquery = `/*\nUpdate '${id}' on flightassignment table.\n The id is Number_ because it updates 2 flights at the same time.\n pilot = '${pilot}', copilot = '${copilot}', \ flight_attendant_1 = '${flight_attendant_1}',\
-    flight_attendant_2 = '${flight_attendant_2}', flight_attendant_3 = '${flight_attendant_3}', flight_attendant_4 = '${flight_attendant_4}'\n*/\nBEGIN;\n${transactionquery}\nCOMMIT;\n`
-    appendtofile(transactions, transactionquery)
+    transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+    appendtofile(transactions, `/*Update both flights starting with flight_id: ${id} and assign pilot: ${pilot}, copilot: ${copilot}, 
+    and flightattendants: ${flight_attendant_1}, ${flight_attendant_2}, ${flight_attendant_3}, ${flight_attendant_4}
+    to it*/\n` + transactionquery)
     res.json({pilot, copilot, flight_attendant_1, flight_attendant_2, 
       flight_attendant_3, flight_attendant_4})
   } catch (err) {
@@ -220,8 +221,9 @@ WHERE shift_id = ${id};`
     await pool.query('BEGIN')
     await pool.query(transactionquery);
     await pool.query('COMMIT')
-    transactionquery = `/*\nUpdate shift id ${id} on table officeshift with ground_worker_1 = '${ground_worker_1}', ground_worker_2 = '${ground_worker_2}', office_worker_1 = '${office_worker_1}', office_worker_2 = '${office_worker_2}\n*/\nBEGIN;\n${transactionquery}\nCOMMIT;`
-    appendtofile (transactions, transactionquery)
+    transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+    appendtofile (transactions, `/*Update shiftid: ${id} and assign groundworkers: ${ground_worker_1}, ${ground_worker_2} 
+    and office workers: ${office_worker_1}, ${office_worker_2} to it*/\n` + transactionquery)
     res.json({ground_worker_1, ground_worker_2, office_worker_1, office_worker_2})
   } catch (err) {
     console.error(err.message);
@@ -232,6 +234,7 @@ WHERE shift_id = ${id};`
 async function paymentupdate (payments) {
   try {
     if(payments.length != 0) {
+      employees = ''
       t1 =
       `SET normal_hours = CASE social_security_num\n`
           t2 =
@@ -242,6 +245,7 @@ async function paymentupdate (payments) {
       `    monthly_salary = CASE social_security_num\n`
           t5 = ''
           payments.map ((payment, index) => (
+            index === payments.length - 1 ? employees += `${payment.social_security_num}`: employees += `${payment.social_security_num}, `,
             index === payments.length - 1 ? t1 += `                     WHEN '${payment.social_security_num}' THEN ${payment.normal_hours}` 
             : t1 += `                     WHEN '${payment.social_security_num}' THEN ${payment.normal_hours}\n`,
       
@@ -260,7 +264,7 @@ async function paymentupdate (payments) {
           await pool.query(transactionquery);
           await pool.query('COMMIT')
           transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
-          appendtofile (transactions, transactionquery)
+          appendtofile (transactions, `/*Update the normal hours, overtime hours, taxes and monthly salary in the payment table for employees: ${employees}*/\n` + transactionquery)
     }
   } catch (err) {
     console.error(err.message);
@@ -279,11 +283,35 @@ WHERE social_security_num = '${id}';`
     await pool.query('BEGIN')
     await pool.query(transactionquery);
     await pool.query('COMMIT')
-    transactionquery = `/*\nUpdate employee information on employee table where the SSN is ${id}.\n'${first_name}', last_name = '${last_name}', email = '${email}', gender = '${gender}', street_num = '${street_address}', city = '${city}', country = '${country}'\nWith  \n*/BEGIN;\n${transactionquery}\nCOMMIT;`
-    appendtofile (transactions, transactionquery)
+    transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+    appendtofile (transactions, `/*Update employee: ${id} information and change their name to: ${first_name} ${last_name}, email: ${email},
+    streetnum: ${street_address}, city: ${city} and country: ${country}*/\n` + transactionquery)
     res.json({first_name, last_name, email, gender, street_address, city, country})
   } catch (err) {
     console.error(err.message);
+  }
+});
+
+app.post("/insertemployee", async (req, res) => {
+  try {
+    const { id, first_name, last_name, email, gender, street_address, city, country, job, airport_code} = req.body;
+    transactionquery1 =
+`INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
+VALUES ('${id}','${first_name}','${last_name}','${email}','${gender}','${street_address}','${city}','${country}','${job}','${airport_code}');`
+    transactionquery2 =
+`INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
+VALUES ('${id}', '${job}', 0, 0, 0, 0);`
+    await pool.query('BEGIN')
+    await pool.query(transactionquery1);
+    await pool.query(transactionquery2);
+    await pool.query('COMMIT')
+    appendtofile (transactions, `/*Insert a new employee: ${id} into employee table with the name: ${first_name} ${last_name}, email: ${email}
+    , gender: ${gender}, street address: ${street_address}, city: ${city}, country: ${country}, 
+    job: ${job}, and current airport code: ${airport_code}. We also insert this employee into payment and set their normal hours, overtime_hours,
+    taxes and monthly salary to 0.*/\n` + 'BEGIN;\n' + transactionquery1 + "\n" + transactionquery2 + '\nCOMMIT;')
+    res.send('Success')
+  } catch (err) {
+    console.log(err)
   }
 });
 

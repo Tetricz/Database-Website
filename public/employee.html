@@ -49,12 +49,14 @@
   <div id="title">
     <h1>Employee Info</h1>
   </div>
+  <div id="alert">
+  </div>
 
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
     <thead class="thead-dark">
       <tr>
-        <th>Social Secturity Number</th>
+        <th>Social Security Number</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -66,6 +68,45 @@
         <th>Current Airport Code</th>
         <th>Benefits</th>
         <th>Edit</th>
+      </tr>
+    </thead>
+    <thead>
+      <tr>
+        <form id = "employeeinsertform">
+          <th id = "new-ssn"></th>
+          <th><input id = "new-firstname" pattern = "^[A-Za-z ]+$" type="text" class="form-control" placeholder= "First Name"></th>
+          <th><input id = "new-lastname" pattern = "^[A-Za-z ]+$" type="text" class="form-control" placeholder= "Last Name"></th>
+          <th><input id = "new-email" type="email" class="form-control" placeholder= "Email"></th>
+          <th>
+          <select id="new-gender" class="form-select" aria-label="Default select example">
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+          </select>
+          </th>
+          <th><input id = "new-address" type="text" class="form-control" placeholder= "Address"></th>
+          <th><input id = "new-city" type="text" class="form-control" placeholder= "City"></th>
+          <th><input id = "new-country" type="text" class="form-control" placeholder= "Country"></th>
+          <th>
+          <select id="new-job" class="form-select" aria-label="Default select example" onchange = "changebenefits()">
+            <option value="pilot">pilot</option>
+            <option value="copilot">copilot</option>
+            <option value="ground crew">ground crew</option>
+            <option value="flight attendant">flight attendant</option>
+            <option value="office worker">office worker</option>
+          </select></th>
+          <th>
+          <select id="new-airport-code" class="form-select" aria-label="Default select example">
+            <option value="PEK">PEK</option>
+            <option value="GRU">GRU</option>
+            <option value="CDG">CDG</option>
+            <option value="SYD">SYD</option>
+            <option value="LAX">LAX</option>
+          </select>
+          </th>
+          <th id = "new-benefits"></th>
+          <th><button class="btn btn-dark" id = "addemployee" type="button">Add</button></th>
+        </form>
       </tr>
     </thead>
     <!-- add todos in tbody by modying the HTML in main.js -->
