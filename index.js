@@ -20,7 +20,7 @@ app.get('/flightassignments', async(req, res)=>{
   try{
     sqlquery = 'SELECT * FROM flightassignment;'
     const allDemos = await pool.query(sqlquery);
-    await appendtofile(sql, sqlquery)
+    appendtofile(sql, sqlquery)
     res.json(allDemos.rows);
   } catch(err){
     console.log(err.message);
@@ -32,7 +32,7 @@ app.get('/officeshifts', async(req, res)=>{
   try{
     sqlquery = 'SELECT * FROM officeshift;'
     const allDemos = await pool.query(sqlquery);
-    await appendtofile(sql, sqlquery)
+    appendtofile(sql, sqlquery)
     res.json(allDemos.rows);
   } catch(err){
     console.log(err.message);
@@ -43,11 +43,12 @@ app.get('/officeshifts', async(req, res)=>{
 app.get('/employee_info', async(req, res)=>{
   try{
     sqlquery = 
-`SELECT *
-FROM employee 
+`SELECT social_security_num, first_name, last_name, email, gender, street_num, city, country, employee.job,
+current_airport_code, medical_benefits, retirement_benefits, travel_expenses, workers_compensation FROM employee, job 
+WHERE employee.job = job.job 
 ORDER BY first_name, last_name;`;
     const allDemos = await pool.query(sqlquery);
-    await appendtofile(sql, sqlquery)
+    appendtofile(sql, `/*Selects ssn, first and last name, email, gender, street num, city, country, job, current airport code, and benefits from the employee and job tables-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
     console.log(err.message);
@@ -136,7 +137,11 @@ FROM (
       ON t1.social_security_num = t2.social_security_num
 ) AS t3;`
     const allDemos = await pool.query(sqlquery);
-    await appendtofile(sql, sqlquery)
+    appendtofile(sql, `/*Selects ssn, hours worked, overtime hours worked, normal payrate, overtime payrate, taxes and
+    monthly salary from employee, flightassignmens, job and country tables.
+    We find all the flights/office shifts assigned to a social security number, get the total hours worked, place anything worked above 40 hours as overtime,
+    then we pull from the job table to get the payrate for the employee and calculate their monthly salary by multiplying hours worked by the appropriate
+    payrate. Lastly we get the tax for the employee's country and multiply it by the previous result, and subtract it to get the monthly salary-->*/\n` + sqlquery)
     res.json(allDemos.rows);
     await paymentupdate(allDemos.rows);
   } catch(err){
@@ -154,7 +159,7 @@ app.get('/flightassignments/:departure_airport/:job', async(req, res)=>{
 FROM employee 
 WHERE current_airport_code = '${departure_airport}' AND job = '${job}';`
     const demo = await pool.query(sqlquery);
-    await appendtofile(sql, sqlquery)
+    appendtofile(sql, `/*Selects ssns to assign that have their current_airport_code the same as the flight departure airport code: ${departure_airport} and job: ${job}-->*/\n` + sqlquery)
     res.json(demo.rows);
   } catch(err){
     console.log(err.message);
@@ -173,7 +178,7 @@ WHERE current_airport_code =
     WHERE office_num = ${office_id}) 
     AND job = '${job}';`
     const demo = await pool.query(sqlquery);
-    await appendtofile(sql, sqlquery)
+    appendtofile(sql, `/*Selects ssns to assign that have their current_airport_code the same as the office id: ${office_id} airport code and job: ${job}-->*/\n` + sqlquery)
     res.json(demo.rows);
   } catch(err){
     console.log(err.message);
@@ -194,7 +199,7 @@ WHERE flight_id LIKE '${id}';`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
-    await appendtofile(transactions, transactionquery)
+    appendtofile(transactions, transactionquery)
     res.json({pilot, copilot, flight_attendant_1, flight_attendant_2, 
       flight_attendant_3, flight_attendant_4})
   } catch (err) {
@@ -215,7 +220,7 @@ WHERE shift_id = ${id};`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
-    await appendtofile (transactions, transactionquery)
+    appendtofile (transactions, transactionquery)
     res.json({ground_worker_1, ground_worker_2, office_worker_1, office_worker_2})
   } catch (err) {
     console.error(err.message);
@@ -254,7 +259,7 @@ async function paymentupdate (payments) {
           await pool.query(transactionquery);
           await pool.query('COMMIT')
           transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
-          await appendtofile (transactions, transactionquery)
+          appendtofile (transactions, transactionquery)
     }
   } catch (err) {
     console.error(err.message);
@@ -274,7 +279,7 @@ WHERE social_security_num = '${id}';`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
-    await appendtofile (transactions, transactionquery)
+    appendtofile (transactions, transactionquery)
     res.json({first_name, last_name, email, gender, street_address, city, country})
   } catch (err) {
     console.error(err.message);
