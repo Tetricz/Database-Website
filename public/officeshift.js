@@ -13,6 +13,10 @@ const setOptions = (results) => {
 
 // function edit demo (connected with updateDemo below)
 const editDemo = (id) => {
+  document.querySelector('#modal-buttons').innerHTML =
+  `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary" id="save-edit-demo" onclick="updateDemo(${id})">Save changes</button>`
+
   const shift_id = demos.filter(demo => demo.shift_id === id)[0].shift_id;
   const office_id = demos.filter(demo => demo.shift_id === id)[0].office_id;
   const ground_worker_1 = demos.filter(demo => demo.shift_id === id)[0].ground_worker_1;
@@ -27,7 +31,6 @@ const editDemo = (id) => {
   document.querySelector('#edited-officeworker2').value = office_worker_2;
   displaySelectOptions(office_id, 'ground crew')
   displaySelectOptions(office_id, 'office worker')
-  document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
 }
 
 // function to display demos

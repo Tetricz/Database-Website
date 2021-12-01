@@ -8,7 +8,9 @@ create table employee (
 	city VARCHAR(50),
 	country VARCHAR(50),
 	job VARCHAR(20),
-	current_airport_code VARCHAR(3)
+	current_airport_code VARCHAR(3),
+	sick_leave INT,
+    vacation_days INT
 );
 
 insert into employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code) values ('110-01-2872', 'Maurise', 'Dello', 'mdello0@list-manage.com', 'Male', '80325', 'Sydney', 'Australia', 'pilot', 'SYD');

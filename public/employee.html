@@ -65,6 +65,8 @@
         <th>Job</th>
         <th>Current Airport Code</th>
         <th>Benefits</th>
+        <th>Sick Leave</th>
+        <th>Vacation Days</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -111,6 +113,8 @@
           </select>
           </th>
           <th id = "new-benefits"></th>
+          <th id = "new-sickleave"></th>
+          <th id = "new-vacationdays"></th>
           <th><button class="btn btn-dark" id = "addemployee" type="button">Add</button></th>
         </form>
       </tr>
@@ -148,9 +152,13 @@
 
         <label>Country</label>
         <input type="text" class="form-control" id="edited-country" placeholder="Enter Country">
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="save-edit-demo">Save changes</button>
+
+        <label>Sick Leave Days</label>
+        <input type="text" class="form-control" id="edited-sickleave" placeholder="Enter Sick Leave Days Remaining">
+
+        <label>Vacation Days</label>
+        <input type="text" class="form-control" id="edited-vacationdays" placeholder="Enter Vacation Days Remaining">
+        <div class="modal-footer" id = "modal-buttons">
         </div>
       </div>
     </div>

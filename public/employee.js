@@ -3,6 +3,8 @@ let demos = []
 
 let newssn = ''
 
+let sickvacationdays = {}
+
 // function to set demos
 const setDemos = (data) => {
   demos = data;
@@ -10,17 +12,21 @@ const setDemos = (data) => {
 
 // function edit demo (connected with updateDemo below)
 const editDemo = (id) => {
+  document.querySelector('#modal-buttons').innerHTML =
+  `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary" id="save-edit-demo" onclick="updateDemo('${id}')">Save changes</button>`
+  
   document.querySelector('#edited-first-name').value = document.querySelector(`#firstname${id}`).innerHTML;
   document.querySelector('#edited-last-name').value = document.querySelector(`#lastname${id}`).innerHTML;
   document.querySelector('#edited-email').value = document.querySelector(`#email${id}`).innerHTML;
   document.querySelector('#edited-street-address').value = document.querySelector(`#streetaddress${id}`).innerHTML;
   document.querySelector('#edited-city').value = document.querySelector(`#city${id}`).innerHTML;
   document.querySelector('#edited-country').value = document.querySelector(`#country${id}`).innerHTML;
-  document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
+  document.querySelector('#edited-sickleave').value = document.querySelector(`#sickleave${id}`).innerHTML;
+  document.querySelector('#edited-vacationdays').value = document.querySelector(`#vacationdays${id}`).innerHTML;
 }
 
 async function insertDemo (id) {
-  console.log(id)
   var first_name = document.querySelector('#new-firstname').value
   var last_name = document.querySelector('#new-lastname').value
   var email = document.querySelector('#new-email').value
@@ -30,6 +36,9 @@ async function insertDemo (id) {
   var country = document.querySelector('#new-country').value
   var job = document.querySelector('#new-job').value
   var airport_code = document.querySelector('#new-airport-code').value
+  var sick_leave = document.querySelector('#new-sickleave').innerHTML
+  var vacation_days = document.querySelector('#new-vacationdays').innerHTML
+  console.log(sick_leave, vacation_days)
   if(first_name == '' || last_name == '' || email == ''|| street_address == ''||
       city == '' || country == '')
   { 
@@ -61,7 +70,7 @@ async function insertDemo (id) {
   else {
     try {
       const body = {id: id, first_name: first_name, last_name: last_name, email: email, gender: gender,
-                      street_address: street_address, city: city, country: country, job: job, airport_code: airport_code};
+                      street_address: street_address, city: city, country: country, job: job, airport_code: airport_code, sick_leave: sick_leave, vacation_days: vacation_days};
       const response = await fetch(`http://localhost:5000/insertemployee/`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -82,21 +91,21 @@ async function insertDemo (id) {
 }
 
 const changebenefits = () => {
-  switch (document.querySelector('#new-job').value) {
-    case "pilot" || "copilot":
-      document.querySelector('#new-benefits').innerHTML = "Medical Retirement Travel Expenses";
-      break;
-    case "flight attendant":
-      document.querySelector('#new-benefits').innerHTML = "Medical Retirement Travel Expenses";
-      break;
-    case "ground crew":
-      document.querySelector('#new-benefits').innerHTML = "Medical Retirement Workers Compensation";
-      break;
-    case "office worker":
-      document.querySelector('#new-benefits').innerHTML = "Medical Retirement Workers Compensation";
-      break;
-    default:
-      break;
+  let job = document.querySelector('#new-job').value;
+  if (job === "pilot" ||job ===  "copilot") {
+    document.querySelector('#new-benefits').innerHTML = "Medical Retirement Travel Expenses";
+    document.querySelector('#new-sickleave').innerHTML = 9;
+    document.querySelector('#new-vacationdays').innerHTML = 16;
+  }
+  else if (job === "flight attendant"){
+    document.querySelector('#new-benefits').innerHTML = "Medical Retirement Travel Expenses";
+    document.querySelector('#new-sickleave').innerHTML = 9;
+    document.querySelector('#new-vacationdays').innerHTML = 14;
+  }
+  else if (job === "ground crew" ||job ===  "office worker"){
+    document.querySelector('#new-benefits').innerHTML = "Medical Retirement Workers Compensation";
+    document.querySelector('#new-sickleave').innerHTML = 9;
+    document.querySelector('#new-vacationdays').innerHTML = 14;
   }
 }
 
@@ -127,6 +136,9 @@ const displayDemos = () => {
       streetaddressid  = "streetaddress" + demo.social_security_num;
       cityid  = "city" + demo.social_security_num;
       countryid  = "country" + demo.social_security_num;
+      sickleaveid  = "sickleave" + demo.social_security_num;
+      vacationdaysid  = "vacationdays" + demo.social_security_num;
+      jobid  = "job" + demo.social_security_num;
       editid  = "edit" + demo.social_security_num;
 
       let benefits = ''
@@ -145,9 +157,11 @@ const displayDemos = () => {
       <th id = "${streetaddressid}">${demo.street_num}</th>
       <th id = "${cityid}">${demo.city}</th>
       <th id = "${countryid}">${demo.country}</th>
-      <th >${demo.job}</th>
+      <th id = "${jobid}">${demo.job}</th>
       <th>${demo.current_airport_code}</th> 
-      <th>${benefits}</th>   
+      <th>${benefits}</th>
+      <th id = ${sickleaveid}>${demo.sick_leave}</th>
+      <th id = ${vacationdaysid}>${demo.vacation_days}</th>   
       <th><button class="btn btn-dark" type="button" data-toggle="modal" data-target="#edit-modal" id = "${editid}" onclick="editDemo('${demo.social_security_num}')">Edit</button></th>
       </tr>`;
   })
@@ -175,9 +189,22 @@ async function selectDemos() {
   } catch (err) {
     console.log(err.message);
   }
+  try {
+    const response = await fetch("http://localhost:5000/sickvacationdays")
+    const jsonData = await response.json();
+
+    jsonData.map (days => {
+      sickvacationdays[days.job] = new Array();
+      sickvacationdays[days.job].push(days.sick_leave, days.vacation_days);
+    })
+
+  } catch (err) {
+    console.log(err.message);
+  }
 }
 
 const isLetterSpace = new RegExp ('^[A-Za-z ]+$')
+const isNumber = new RegExp ('^[0-9]+$')
 
 // update a demo description
 async function updateDemo(id) {
@@ -189,33 +216,50 @@ async function updateDemo(id) {
   var street_address = document.querySelector('#edited-street-address').value;
   var city = document.querySelector('#edited-city').value;
   var country = document.querySelector('#edited-country').value;
+  var sickleave = document.querySelector('#edited-sickleave').value;
+  var vacationdays = document.querySelector('#edited-vacationdays').value;
+  var job = document.querySelector(`#job${id}`).innerHTML;
 
   //Make sure no input boxes are empty
   if(first_name == '' || last_name == '' || email == ''|| street_address == ''||
       city == '' || country == '')
   { 
-    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+    document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Unsuccessful!</strong> Please don't leave any box empty
                                                           </div>`;
   }
 
+  else if (sickvacationdays[job][0] < sickleave || sickvacationdays[job][1] < vacationdays ){
+    document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Unsuccessful!</strong> You cannot add days higher than the initial sick leave and vacation days.
+                                                          </div>`;
+  }
+  
+  else if (!isNumber.test(sickleave) || !isNumber.test(vacationdays)){
+    document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Unsuccessful!</strong> Please enter a number value for sick leave and vacation days.
+                                                          </div>`;
+  }
+  
   else if (!isLetterSpace.test(first_name) || !isLetterSpace.test(last_name)){
-    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+    document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Unsuccessful!</strong> Please enter letters or spaces for your name.
                                                           </div>`;
   }
   
   else if (!email.includes('@') && !email.includes('.')){
-    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+    document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Unsuccessful!</strong> Please enter a valid email address.
                                                           </div>`;
   }
 
   else if (!isLetterSpace.test(first_name) || !isLetterSpace.test(last_name)){
-    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+    document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Unsuccessful!</strong> Please enter letters or spaces for your name.
                                                           </div>`;
@@ -226,7 +270,7 @@ async function updateDemo(id) {
     //Edit the database
     try {
       const body = {first_name: first_name, last_name: last_name, email: email,
-                      street_address: street_address, city: city, country: country};
+                      street_address: street_address, city: city, country: country, sick_leave: sickleave, vacation_days: vacationdays};
       const response = await fetch(`http://localhost:5000/employee_info/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
@@ -235,7 +279,7 @@ async function updateDemo(id) {
   
       selectDemos()
       
-      document.querySelector('#alert').innerHTML += `<div class="alert alert-success alert-dismissible">
+      document.querySelector('#edit-form').innerHTML += `<div class="alert alert-success alert-dismissible">
                                                               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                               <strong>Success!</strong> Please close to see the changes made.
                                                             </div>`;
@@ -244,6 +288,5 @@ async function updateDemo(id) {
       console.log(err.message);
     }
   }
-  
 }
 
