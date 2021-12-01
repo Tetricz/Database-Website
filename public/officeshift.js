@@ -50,6 +50,7 @@ const displayDemos = () => {
     `<tr>
     <th>${demo.shift_id}</th>
     <th>${demo.office_id}</th>
+    <th>${demo.airport_code}</th>
     <th>${shift_start}</th>
     <th>${shift_end}</th>
     <th>${demo.ground_worker_1}</th>
