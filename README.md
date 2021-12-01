@@ -1,4 +1,10 @@
 # Database-Website
+## Team 19
+- Daniels,David Lee<br>
+- Zaman,Tahmeed<br>
+- Dinh,Phuong Hoang<br>
+- Phan,Danny Duy
+
 ## Database Connection information
 ```
 Host: fanny.db.elephantsql.com
