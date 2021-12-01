@@ -7,7 +7,10 @@ User: dbqbdkgv
 Password: SZwJ4LWOJ-pWOjpGt0S0z214wUfmdkwq
 ```
 ```
-psql -h fanny.db.elephantsql.com -d dbqbdkgv -U dbqbdkgv -W 
+host: "3380db.cs.uh.edu",
+user: "dbs024",
+password: "tiapw4dbs",
+database: "COSC3380",
 ```
 
 ## Node Information
@@ -17,5 +20,14 @@ NPM Version:  v7.22.0<br>
 Install node modules
 ```
 npm install
+```
+
+## Contributors
+```
+Peter Dinh 1835957 dbs027
+Danny Phan 1609411 dbs095
+Tahmeed Zaman 1625011 dbs125
+David Lee Daniels dbs024
+
 ```
 
