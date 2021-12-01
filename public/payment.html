@@ -1,5 +1,33 @@
-<!DOCTYPE html>
 <html lang="en">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Airline HR</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="employee.html">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="payment.html">Payment</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shift Assignments
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="flightassignment.html">Flight Assignment</a>
+          <a class="dropdown-item" href="officeshift.html">Ground/Office Shift Assignment</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <head>
   <meta charset="UTF-8">
@@ -18,12 +46,12 @@
 <body>
   <!-- Title -->
   <div id="title">
-    <h2>Payment Stubs</h2>
+    <h1>Payment Stubs</h1>
   </div>
 
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
-    <thead>
+    <thead class="thead-dark">
       <tr>
         <th>Social Security Number</th>
         <th>Job</th>
@@ -33,7 +61,6 @@
         <th>Overtime Pay Rate</th>>
         <th>Taxes</th>
         <th>Monthly Salary</th>
-        <th>Update</th>
       </tr>
     </thead>
     <!-- add todos in tbody by modying the HTML in main.js -->

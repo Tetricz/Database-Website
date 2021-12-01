@@ -12,7 +12,7 @@ const setOptions = (results) => {
 }
 
 // function edit demo (connected with updateDemo below)
-const editDemo = (id) => {
+async function editDemo (id) {
   const flight_id = demos.filter(demo => demo.flight_id === id)[0].flight_id;
   const pilot = demos.filter(demo => demo.flight_id === id)[0].pilot; 
   const copilot = demos.filter(demo => demo.flight_id === id)[0].copilot; 
@@ -29,15 +29,15 @@ const editDemo = (id) => {
   document.querySelector('#edited-flightattendant2').value = flight_attendant_2;
   document.querySelector('#edited-flightattendant3').value = flight_attendant_3;
   document.querySelector('#edited-flightattendant4').value = flight_attendant_4;
-  displaySelectOptions(departure_airport, 'pilot');
-  displaySelectOptions(departure_airport, 'copilot');
-  displaySelectOptions(departure_airport, 'flight attendant');
+  
+  await displaySelectOptions(departure_airport, 'pilot');
+  await displaySelectOptions(departure_airport, 'copilot');
+  await displaySelectOptions(departure_airport, 'flight attendant');
   document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
 }
 
 // function to display demos
 const displayDemos = () => {
-  
   demos.sort((a, b) => { //sort in ascending order
     return a.flight_id.localeCompare(b.flight_id);
   });
@@ -47,6 +47,13 @@ const displayDemos = () => {
   // display all demos by modifying the HTML in "demo-table", adds edit and delete buttons as well
   let tableHTML = "";
   demos.map(demo =>{
+    pilotid = "pilot" + demo.flight_id;
+    copilotid = "copilot" + demo.flight_id;
+    flight_attendant_1 = "flight_attendant_1" + demo.flight_id;
+    flight_attendant_2  = "flight_attendant_2" + demo.flight_id;
+    flight_attendant_3  = "flight_attendant_3" + demo.flight_id;
+    flight_attendant_4  = "flight_attendant_4" + demo.flight_id;
+    editid = "edit" + demo.flight_id;
     arrival_time = demo.scheduled_arrival_time
     arrival_time = arrival_time.replace(/T|Z|.000/gi, ' ')
     departure_time = demo.scheduled_departure_time
@@ -65,7 +72,7 @@ const displayDemos = () => {
       <th>${demo.flight_attendant_2}</th>
       <th>${demo.flight_attendant_3}</th>
       <th>${demo.flight_attendant_4}</th>
-      <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo('${demo.flight_id}')">Edit</button></th>
+      <th><button class="btn btn-dark" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo('${demo.flight_id}')">Edit</button></th>
       </tr>`;
     }
     else{
@@ -96,19 +103,10 @@ selectDemos();
 async function selectDemos() {
   // use try... catch... to catch error
   try {
-    // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("/demos")
-    // connect to heroku, remove localhost:port
-    // const response = await fetch("/demos")
+    const response = await fetch("http://localhost:5000/flightassignments")
     const jsonData = await response.json();
-    // console.log(jsonData);
-
     setDemos(jsonData);
     displayDemos();
-    // setTimeout(() => {
-    //   console.log(demos);
-    // }, 100);
-
   } catch (err) {
     console.log(err.message);
   }
@@ -116,12 +114,7 @@ async function selectDemos() {
 
 // update a demo description
 async function updateDemo(id) {
-  // console.log(key)
-  // console.log(description);
-
   try {
-    // update a demo from "http://localhost:5000/demos/${id}", with "PUT" method
-    // connect to heroku, remove localhost:port
     repeatedvalue = false;
     const pilot = document.querySelector('#edited-pilot').value;
     const copilot = document.querySelector('#edited-copilot').value
@@ -154,8 +147,7 @@ async function updateDemo(id) {
       const body = {pilot: pilot, copilot: copilot, flight_attendant_1: flight_attendant_1, flight_attendant_2: flight_attendant_2, 
         flight_attendant_3: flight_attendant_3, flight_attendant_4: flight_attendant_4};
         
-      const response = await fetch(`/demos/${idtemp}`, {
-      // const response = await fetch(`/demos/${id}`, {
+      const response = await fetch(`http://localhost:5000/flightassignments/${idtemp}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)
@@ -204,9 +196,7 @@ async function updateDemo(id) {
 
 async function displaySelectOptions(departure_airport, job) {
   try {
-    // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch(`/demos/${departure_airport}/${job}`)
-    // connect to heroku, remove localhost:port
+    const response = await fetch(`http://localhost:5000/flightassignments/${departure_airport}/${job}`)
     const jsonData = await response.json();
 
     if (job == 'pilot'){

@@ -5,3 +5,4 @@ DROP TABLE IF EXISTS flightassignment;
 DROP TABLE IF EXISTS job;
 DROP TABLE IF EXISTS office;
 DROP TABLE IF EXISTS officeshift;
+DROP TABLE IF EXISTS payment;

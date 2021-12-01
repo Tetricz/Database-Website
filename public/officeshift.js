@@ -56,7 +56,7 @@ const displayDemos = () => {
     <th>${demo.ground_worker_2}</th>
     <th>${demo.office_worker_1}</th>
     <th>${demo.office_worker_2}</th>
-    <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo(${demo.shift_id})">Edit</button></th>
+    <th><button class="btn btn-dark" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo(${demo.shift_id})">Edit</button></th>
     </tr>`;
   })
   demoTable.innerHTML = tableHTML;
@@ -71,7 +71,7 @@ async function selectDemos() {
   // use try... catch... to catch error
   try {
     // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("/officeshifts")
+    const response = await fetch("http://localhost:5000/officeshifts")
     // connect to heroku, remove localhost:port
     // const response = await fetch("/demos")
     const jsonData = await response.json();
@@ -125,7 +125,7 @@ async function updateDemo(id) {
     if (!repeatedvalue){
       const body = {ground_worker_1: ground_worker_1, ground_worker_2: ground_worker_2, office_worker_1: office_worker_1, office_worker_2: office_worker_2};
         
-      const response = await fetch(`/officeshifts/${id}`, {
+      const response = await fetch(`http://localhost:5000/officeshifts/${id}`, {
       // const response = await fetch(`/demos/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
@@ -153,7 +153,7 @@ async function updateDemo(id) {
 async function displaySelectOptions(office_id, job) {
   try {
     // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch(`/officeshifts/${office_id}/${job}`)
+    const response = await fetch(`http://localhost:5000/officeshifts/${office_id}/${job}`)
     // connect to heroku, remove localhost:port
     const jsonData = await response.json();
 

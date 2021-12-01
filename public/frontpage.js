@@ -2,15 +2,16 @@
 async function resetDB() {
   try {
     console.log('Resetting Database')
-    await fetch("/reset", {
+    
+    await fetch("http://localhost:5000/reset", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" }
     });
+    
     document.querySelector('#edit-form').innerHTML += `<div class="alert alert-success alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                             <strong>Database Reset</strong>
                                                           </div>`;
-    console.log('Database reset')
   } catch (err) {
     console.log(err.message);
   }

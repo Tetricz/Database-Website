@@ -8,6 +8,13 @@ const setDemos = (data) => {
 
 // function edit demo (connected with updateDemo below)
 const editDemo = (id) => {
+  document.querySelector('#edited-first-name').value = document.querySelector(`#firstname${id}`).innerHTML;
+  document.querySelector('#edited-last-name').value = document.querySelector(`#lastname${id}`).innerHTML;
+  document.querySelector('#edited-email').value = document.querySelector(`#email${id}`).innerHTML;
+  document.querySelector('#edited-gender').value = document.querySelector(`#gender${id}`).innerHTML;
+  document.querySelector('#edited-street-address').value = document.querySelector(`#streetaddress${id}`).innerHTML;
+  document.querySelector('#edited-city').value = document.querySelector(`#city${id}`).innerHTML;
+  document.querySelector('#edited-country').value = document.querySelector(`#country${id}`).innerHTML;
   document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
 }
 
@@ -18,22 +25,30 @@ const displayDemos = () => {
 
   // display all demos by modifying the HTML 
   let tableHTML = "";
+
   demos.map(demo =>{
+      firstnameid = "firstname" + demo.social_security_num;
+      lastnameid = "lastname" + demo.social_security_num;
+      emailid = "email" + demo.social_security_num;
+      genderid  = "gender" + demo.social_security_num;
+      streetaddressid  = "streetaddress" + demo.social_security_num;
+      cityid  = "city" + demo.social_security_num;
+      countryid  = "country" + demo.social_security_num;
+      editid  = "edit" + demo.social_security_num;
+
       tableHTML +=
       `<tr Social Security Number=${demo.social_security_num}>
       <th>${demo.social_security_num}</th>
-      <th>${demo.first_name}</th>
-      <th>${demo.last_name}</th>
-      <th>${demo.email}</th>
-      <th>${demo.gender}</th>
-      <th>${demo.street_num}</th>
-      <th>${demo.city}</th>
-      <th>${demo.country}</th>
-      <th>${demo.job}</th>
-      <th>${demo.current_airport_code}</th>
-      <th>${demo.medical_benefits}</th>
-      <th>${demo.retirement_benefits}</th>
-      <th><button class="btn btn-warning" type="button" data-toggle="modal" data-target="#edit-modal" onclick="editDemo('${demo.social_security_num}')">Edit</button></th>
+      <th id = "${firstnameid}">${demo.first_name}</th>
+      <th id = "${lastnameid}">${demo.last_name}</th>
+      <th id = "${emailid}">${demo.email}</th>
+      <th id = "${genderid}">${demo.gender}</th>
+      <th id = "${streetaddressid}">${demo.street_num}</th>
+      <th id = "${cityid}">${demo.city}</th>
+      <th id = "${countryid}">${demo.country}</th>
+      <th >${demo.job}</th>
+      <th>${demo.current_airport_code}</th>      
+      <th><button class="btn btn-dark" type="button" data-toggle="modal" data-target="#edit-modal" id = "${editid}" onclick="editDemo('${demo.social_security_num}')">Edit</button></th>
       </tr>`;
   })
   demoTable.innerHTML = tableHTML;
@@ -47,19 +62,12 @@ selectDemos();
 async function selectDemos() {
   // use try... catch... to catch error
   try {
-    // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("/employee_info")
-    // connect to heroku, remove localhost:port
-    // const response = await fetch("/demos")
+    const response = await fetch("http://localhost:5000/employee_info")
     const jsonData = await response.json();
-    // console.log(jsonData);
 
     setDemos(jsonData);
     
     displayDemos();
-    // setTimeout(() => {
-    //   console.log(demos);
-    // }, 100);
 
   } catch (err) {
     console.log(err.message);
@@ -78,12 +86,10 @@ async function updateDemo(id) {
   var street_address = document.querySelector('#edited-street-address').value;
   var city = document.querySelector('#edited-city').value;
   var country = document.querySelector('#edited-country').value;
-  //const job = document.querySelector('#edited-job').value;
-  var current_airport_code = document.querySelector('#edited-current-airport-code').value;
 
   //Make sure no input boxes are empty
   if(first_name == '' || last_name == '' || email == '' || gender == '' || street_address == ''||
-      city == '' || country == '' || current_airport_code == '')
+      city == '' || country == '')
   { 
     document.querySelector('#edit-form').innerHTML += `<div class="alert alert-danger alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -95,12 +101,9 @@ async function updateDemo(id) {
   {
     //Edit the database
     try {
-      // update a demo from "http://localhost:5000/demos/${id}", with "PUT" method
-      // connect to heroku, remove localhost:port
       const body = {first_name: first_name, last_name: last_name, email: email, gender: gender,
-                      street_address: street_address, city: city, country: country, current_airport_code: current_airport_code};
-      const response = await fetch(`/employee_info/${id}`, {
-      // const response = await fetch(`/demos/${id}`, {
+                      street_address: street_address, city: city, country: country};
+      const response = await fetch(`http://localhost:5000/employee_info/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)

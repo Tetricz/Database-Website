@@ -1,5 +1,33 @@
-<!DOCTYPE html>
 <html lang="en">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Airline HR</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="employee.html">Employees</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="payment.html">Payment</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shift Assignments
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="flightassignment.html">Flight Assignment</a>
+          <a class="dropdown-item" href="officeshift.html">Ground/Office Shift Assignment</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <head>
   <meta charset="UTF-8">
@@ -18,12 +46,12 @@
 <body>
   <!-- Title -->
   <div id="title">
-    <h2>Employee Info</h2>
+    <h1>Employee Info</h1>
   </div>
 
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
-    <thead>
+    <thead class="thead-dark">
       <tr>
         <th>Social Secturity Number</th>
         <th>First Name</th>
@@ -35,8 +63,6 @@
         <th>Country</th>
         <th>Job</th>
         <th>Current Airport Code</th>
-        <th>Medical Benefits</th>
-        <th>Retirement Benefits</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -56,10 +82,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>
-        <!-- <label>Social Security Number</label>
-        <input type="text" class="form-control" id="edited-SSN" placeholder="Enter Social Security Number"> -->
-        
+        </div>      
         <label>First Name</label>
         <input type="text" class="form-control" id="edited-first-name" placeholder= "Enter First Name">
 
@@ -80,23 +103,6 @@
 
         <label>Country</label>
         <input type="text" class="form-control" id="edited-country" placeholder="Enter Country">
-
-        <!-- <label>Job</label>
-        <input type="text" class="form-control" id="edited-job" placeholder="Enter Job"> -->
-
-        <!-- <label>Current Airport Code</label>
-        <input type="text" class="form-control" id="edited-current-airport-code" placeholder="Enter Current Airport Code"> -->
-
-        <label>Choose a car:</label>
-          <select name="Airport_code" id="edited-current-airport-code">
-            <option value="N/A">N/A</option>
-            <option value="PEK">PEK</option>
-            <option value="SYD">SYD</option>
-            <option value="LAX">LAX</option>
-            <option value="CDG">CDG</option>
-            <option value="GRU">GRU</option>
-          </select>
-
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="save-edit-demo">Save changes</button>
