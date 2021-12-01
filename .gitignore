@@ -19,8 +19,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # generated sql files
-./query.sql
-./transactions.sql
+*.sql
 
 # vscode
 ./.vscode
