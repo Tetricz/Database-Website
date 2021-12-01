@@ -36,6 +36,12 @@ const displayDemos = () => {
       countryid  = "country" + demo.social_security_num;
       editid  = "edit" + demo.social_security_num;
 
+      let benefits = ''
+      demo.medical_benefits === true ?  benefits += 'Medical ' : null
+      demo.retirement_benefits === true ?  benefits += 'Retirement ' : null
+      demo.travel_expenses === true ?  benefits += 'Travel expenses ' : null
+      demo.workers_compensation === true ?  benefits += 'Workers compensation ' : null
+
       tableHTML +=
       `<tr Social Security Number=${demo.social_security_num}>
       <th>${demo.social_security_num}</th>
@@ -47,7 +53,8 @@ const displayDemos = () => {
       <th id = "${cityid}">${demo.city}</th>
       <th id = "${countryid}">${demo.country}</th>
       <th >${demo.job}</th>
-      <th>${demo.current_airport_code}</th>      
+      <th>${demo.current_airport_code}</th> 
+      <th>${benefits}</th>   
       <th><button class="btn btn-dark" type="button" data-toggle="modal" data-target="#edit-modal" id = "${editid}" onclick="editDemo('${demo.social_security_num}')">Edit</button></th>
       </tr>`;
   })
