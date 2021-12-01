@@ -302,10 +302,30 @@ app.post("/reset", async (req, res) => {
   }
 });
 
+app.get('/officeshift', function(req, res) {
+  res.sendFile(__dirname + '/public/officeshift.html')
+});
+
+app.get('/employee', function(req, res) {
+  res.sendFile(__dirname + '/public/employee.html')
+});
+
+app.get('/flightassignment', function(req, res) {
+  res.sendFile(__dirname + '/public/flightassignment.html')
+});
+
+app.get('/payment', function(req, res) {
+  res.sendFile(__dirname + '/public/payment.html')
+});
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+
 // set up the server listening at port 5000 (the port number can be changed)
 const port = process.env.PORT || 5000;
 app.listen(port, ()=>{
-  console.log(`server has started on port ${port}`);
+  console.log(`started on *:${port} \nopen http://127.0.0.1:5000`);
 });
 
 async function appendtofile(filename, text){
