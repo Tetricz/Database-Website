@@ -13,7 +13,6 @@ const editDemo = (id) => {
   document.querySelector('#edited-first-name').value = document.querySelector(`#firstname${id}`).innerHTML;
   document.querySelector('#edited-last-name').value = document.querySelector(`#lastname${id}`).innerHTML;
   document.querySelector('#edited-email').value = document.querySelector(`#email${id}`).innerHTML;
-  document.querySelector('#edited-gender').value = document.querySelector(`#gender${id}`).innerHTML;
   document.querySelector('#edited-street-address').value = document.querySelector(`#streetaddress${id}`).innerHTML;
   document.querySelector('#edited-city').value = document.querySelector(`#city${id}`).innerHTML;
   document.querySelector('#edited-country').value = document.querySelector(`#country${id}`).innerHTML;
@@ -45,7 +44,7 @@ async function insertDemo (id) {
                                                             <strong>Unsuccessful!</strong> Please enter letters or spaces for your name.
                                                           </div>`;
   }
-
+  
   else if (!email.includes('@') && !email.includes('.')){
     document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
                                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -68,14 +67,14 @@ async function insertDemo (id) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)
       })
-
+      
       selectDemos()
-
+      
       document.querySelector('#alert').innerHTML += `<div class="alert alert-success alert-dismissible">
                                                               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                                               <strong>Success!</strong> Please close to see the changes made.
                                                             </div>`;
-
+    
     } catch (err) {
       console.log(err.message);
     }
@@ -106,7 +105,6 @@ const changebenefits = () => {
 
 // function to display demos
 const displayDemos = () => {
-  
   const demoTable = document.querySelector('#demo-table');
 
   ssnexists = true;
@@ -129,7 +127,6 @@ const displayDemos = () => {
       firstnameid = "firstname" + demo.social_security_num;
       lastnameid = "lastname" + demo.social_security_num;
       emailid = "email" + demo.social_security_num;
-      genderid  = "gender" + demo.social_security_num;
       streetaddressid  = "streetaddress" + demo.social_security_num;
       cityid  = "city" + demo.social_security_num;
       countryid  = "country" + demo.social_security_num;
@@ -140,14 +137,14 @@ const displayDemos = () => {
       demo.retirement_benefits === true ?  benefits += 'Retirement ' : null
       demo.travel_expenses === true ?  benefits += 'Travel Expenses ' : null
       demo.workers_compensation === true ?  benefits += 'Workers Compensation ' : null
-
+      
       tableHTML +=
       `<tr Social Security Number=${demo.social_security_num}>
       <th>${demo.social_security_num}</th>
       <th id = "${firstnameid}">${demo.first_name}</th>
       <th id = "${lastnameid}">${demo.last_name}</th>
       <th id = "${emailid}">${demo.email}</th>
-      <th id = "${genderid}">${demo.gender}</th>
+      <th>${demo.gender}</th>
       <th id = "${streetaddressid}">${demo.street_num}</th>
       <th id = "${cityid}">${demo.city}</th>
       <th id = "${countryid}">${demo.country}</th>
@@ -175,7 +172,7 @@ async function selectDemos() {
     const jsonData = await response.json();
 
     setDemos(jsonData);
-    
+
     displayDemos();
 
   } catch (err) {
@@ -184,8 +181,6 @@ async function selectDemos() {
 }
 
 const isLetterSpace = new RegExp ('^[A-Za-z ]+$')
-const isEmail = new RegExp ('/^\S+@\S+\.\S+$/')
-
 
 // update a demo description
 async function updateDemo(id) {
@@ -194,13 +189,12 @@ async function updateDemo(id) {
   var first_name = document.querySelector('#edited-first-name').value;
   var last_name = document.querySelector('#edited-last-name').value;
   var email = document.querySelector('#edited-email').value;
-  var gender = document.querySelector('#edited-gender').value;
   var street_address = document.querySelector('#edited-street-address').value;
   var city = document.querySelector('#edited-city').value;
   var country = document.querySelector('#edited-country').value;
 
   //Make sure no input boxes are empty
-  if(first_name == '' || last_name == '' || email == '' || street_address == ''||
+  if(first_name == '' || last_name == '' || email == ''|| street_address == ''||
       city == '' || country == '')
   { 
     document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
@@ -229,11 +223,32 @@ async function updateDemo(id) {
                                                           </div>`;
   }
 
+  else if (!isLetterSpace.test(first_name) || !isLetterSpace.test(last_name)){
+    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Unsuccessful!</strong> Please enter letters or spaces for your name.
+                                                          </div>`;
+  }
+  
+  else if (!email.includes('@') && !email.includes('.')){
+    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Unsuccessful!</strong> Please enter a valid email address.
+                                                          </div>`;
+  }
+
+  else if (!isLetterSpace.test(first_name) || !isLetterSpace.test(last_name)){
+    document.querySelector('#alert').innerHTML += `<div class="alert alert-danger alert-dismissible">
+                                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                            <strong>Unsuccessful!</strong> Please enter letters or spaces for your name.
+                                                          </div>`;
+  }
+
   else
   {
     //Edit the database
     try {
-      const body = {first_name: first_name, last_name: last_name, email: email, gender: gender,
+      const body = {first_name: first_name, last_name: last_name, email: email,
                       street_address: street_address, city: city, country: country};
       const response = await fetch(`http://localhost:5000/employee_info/${id}`, {
         method: "PUT",

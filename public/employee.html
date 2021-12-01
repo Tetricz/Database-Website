@@ -51,7 +51,6 @@
   </div>
   <div id="alert">
   </div>
-
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
     <thead class="thead-dark">
@@ -86,7 +85,15 @@
           </th>
           <th><input id = "new-address" type="text" class="form-control" placeholder= "Address"></th>
           <th><input id = "new-city" type="text" class="form-control" placeholder= "City"></th>
-          <th><input id = "new-country" type="text" class="form-control" placeholder= "Country"></th>
+          <th>
+            <select id="new-country" class="form-select" aria-label="Default select example">
+              <option value="Brazil">Brazil</option>
+              <option value="United States">United States</option>
+              <option value="China">China</option>
+              <option value="Australia">Australia</option>
+              <option value="France">France</option>
+            </select>
+          </th>
           <th>
           <select id="new-job" class="form-select" aria-label="Default select example" onchange = "changebenefits()">
             <option value="pilot">pilot</option>
@@ -115,7 +122,6 @@
   </table>
   <!-- End of dynamic table -->
 
-
   <!-- the popup modal, used for update the demo description -->
   <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -134,9 +140,6 @@
 
         <label>Email</label>
         <input type="email" class="form-control" id="edited-email" placeholder="Enter Email">
-
-        <label>Gender</label>
-        <input type="text" class="form-control" id="edited-gender" placeholder="Enter Gender">
 
         <label>Street Address</label>
         <input type="text" class="form-control" id="edited-street-address" placeholder="Enter Street Address">

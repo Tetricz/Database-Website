@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const pool = require('./creds');
 const sql = 'query.sql'
-const transactions = 'transactions.sql'
+const transactions = 'transaction.sql'
 
 //////////////////////////////////////////////
 // add for keroku use
@@ -20,7 +20,7 @@ app.get('/flightassignments', async(req, res)=>{
   try{
     sqlquery = 'SELECT * FROM flightassignment;'
     const allDemos = await pool.query(sqlquery);
-    appendtofile(sql, sqlquery)
+    appendtofile(sql, `/*Selects all fields from flightassignment table to display-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
     console.log(err.message);
@@ -30,9 +30,12 @@ app.get('/flightassignments', async(req, res)=>{
 //get all officeshifts
 app.get('/officeshifts', async(req, res)=>{
   try{
-    sqlquery = 'SELECT * FROM officeshift;'
+    sqlquery = 
+`SELECT shift_id, officeshift.office_id, airport_code, shift_start, shift_end, ground_worker_1, ground_worker_2, office_worker_1, office_worker_2 
+FROM officeshift, office 
+WHERE officeshift.office_id = office_num;`
     const allDemos = await pool.query(sqlquery);
-    appendtofile(sql, sqlquery)
+    appendtofile(sql, `/*Selects all fields from officeshift table and airport_code from office table to display-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
     console.log(err.message);
@@ -275,10 +278,10 @@ async function paymentupdate (payments) {
 app.put("/employee_info/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, email, gender, street_address, city, country} = req.body;
+    const { first_name, last_name, email, street_address, city, country} = req.body;
     transactionquery =
 `UPDATE employee
-SET first_name = '${first_name}', last_name = '${last_name}', email = '${email}', gender = '${gender}', street_num = '${street_address}', city = '${city}', country = '${country}'
+SET first_name = '${first_name}', last_name = '${last_name}', email = '${email}', street_num = '${street_address}', city = '${city}', country = '${country}'
 WHERE social_security_num = '${id}';`
     await pool.query('BEGIN')
     await pool.query(transactionquery);
@@ -286,7 +289,7 @@ WHERE social_security_num = '${id}';`
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
     appendtofile (transactions, `/*Update employee: ${id} information and change their name to: ${first_name} ${last_name}, email: ${email},
     streetnum: ${street_address}, city: ${city} and country: ${country}*/\n` + transactionquery)
-    res.json({first_name, last_name, email, gender, street_address, city, country})
+    res.json({first_name, last_name, email, street_address, city, country})
   } catch (err) {
     console.error(err.message);
   }
