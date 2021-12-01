@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const pool = require('./creds');
 const sql = 'query.sql'
-const transactions = 'transactions.sql'
+const transactions = 'transaction.sql'
 
 //////////////////////////////////////////////
 // add for keroku use
