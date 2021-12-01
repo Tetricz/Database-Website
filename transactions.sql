@@ -500,3 +500,165 @@ SET normal_hours = CASE social_security_num
                    END
 WHERE social_security_num IN ('689-20-0248');
 COMMIT;
+/*Update shiftid: 1 and assign groundworkers: 158-61-5318, N/A 
+    and office workers: N/A, N/A to it*/
+BEGIN;
+UPDATE officeshift 
+SET ground_worker_1 = '158-61-5318', ground_worker_2 = 'N/A', office_worker_1 = 'N/A', office_worker_2 = 'N/A'
+WHERE shift_id = 1;
+COMMIT;
+/*Update the normal hours, overtime hours, taxes and monthly salary in the payment table for employees: 158-61-5318*/
+BEGIN;
+Update payment
+SET normal_hours = CASE social_security_num
+                     WHEN '158-61-5318' THEN 8
+                   END,
+    overtime_hours = CASE social_security_num
+                     WHEN '158-61-5318' THEN 0
+                   END,
+    taxes = CASE social_security_num
+                     WHEN '158-61-5318' THEN 70.00
+                   END,
+    monthly_salary = CASE social_security_num
+                     WHEN '158-61-5318' THEN 130.00
+                   END
+WHERE social_security_num IN ('158-61-5318');
+COMMIT;
+/*Update the normal hours, overtime hours, taxes and monthly salary in the payment table for employees: 158-61-5318*/
+BEGIN;
+Update payment
+SET normal_hours = CASE social_security_num
+                     WHEN '158-61-5318' THEN 8
+                   END,
+    overtime_hours = CASE social_security_num
+                     WHEN '158-61-5318' THEN 0
+                   END,
+    taxes = CASE social_security_num
+                     WHEN '158-61-5318' THEN 70.00
+                   END,
+    monthly_salary = CASE social_security_num
+                     WHEN '158-61-5318' THEN 130.00
+                   END
+WHERE social_security_num IN ('158-61-5318');
+COMMIT;
+/*Insert a new employee: 935-23-5959 into employee table with the name: A A, email: ariyuneasaki@gmail.com
+    , gender: Female, street address: A, city: A, country: Brazil, 
+    job: pilot, and current airport code: PEK. We also insert this employee into payment and set their normal hours, overtime_hours,
+    taxes and monthly salary to 0.*/
+BEGIN;
+INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
+VALUES ('935-23-5959','A','A','ariyuneasaki@gmail.com','Female','A','A','Brazil','pilot','PEK');
+INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
+VALUES ('935-23-5959', 'pilot', 0, 0, 0, 0);
+COMMIT;
+/*Insert a new employee: 462-75-3491 into employee table with the name: A A, email: ariyuneasaki@gmail.com
+    , gender: Female, street address: A, city: A, country: Brazil, 
+    job: ground crew, and current airport code: PEK. We also insert this employee into payment and set their normal hours, overtime_hours,
+    taxes and monthly salary to 0.*/
+BEGIN;
+INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
+VALUES ('462-75-3491','A','A','ariyuneasaki@gmail.com','Female','A','A','Brazil','ground crew','PEK');
+INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
+VALUES ('462-75-3491', 'ground crew', 0, 0, 0, 0);
+COMMIT;
+/*Insert a new employee: 687-95-5577 into employee table with the name: A A, email: ariyuneasaki@gmail.com
+    , gender: Female, street address: A, city: A, country: Brazil, 
+    job: office worker, and current airport code: PEK. We also insert this employee into payment and set their normal hours, overtime_hours,
+    taxes and monthly salary to 0.*/
+BEGIN;
+INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
+VALUES ('687-95-5577','A','A','ariyuneasaki@gmail.com','Female','A','A','Brazil','office worker','PEK');
+INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
+VALUES ('687-95-5577', 'office worker', 0, 0, 0, 0);
+COMMIT;
+/*Insert a new employee: 749-29-6226 into employee table with the name: A A, email: ariyuneasaki@gmail.com
+    , gender: Female, street address: A, city: A, country: Brazil, 
+    job: office worker, and current airport code: GRU. We also insert this employee into payment and set their normal hours, overtime_hours,
+    taxes and monthly salary to 0.*/
+BEGIN;
+INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
+VALUES ('749-29-6226','A','A','ariyuneasaki@gmail.com','Female','A','A','Brazil','office worker','GRU');
+INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
+VALUES ('749-29-6226', 'office worker', 0, 0, 0, 0);
+COMMIT;
+/*Insert a new employee: 715-16-1171 into employee table with the name: A A, email: ariyuneasaki@gmail.com
+    , gender: Female, street address: A, city: A, country: Brazil, 
+    job: office worker, and current airport code: LAX. We also insert this employee into payment and set their normal hours, overtime_hours,
+    taxes and monthly salary to 0.*/
+BEGIN;
+INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
+VALUES ('715-16-1171','A','A','ariyuneasaki@gmail.com','Female','A','A','Brazil','office worker','LAX');
+INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
+VALUES ('715-16-1171', 'office worker', 0, 0, 0, 0);
+COMMIT;
+/*Update shiftid: 73 and assign groundworkers: N/A, N/A 
+    and office workers: 749-29-6226, N/A to it*/
+BEGIN;
+UPDATE officeshift 
+SET ground_worker_1 = 'N/A', ground_worker_2 = 'N/A', office_worker_1 = '749-29-6226', office_worker_2 = 'N/A'
+WHERE shift_id = 73;
+COMMIT;
+/*Update shiftid: 37 and assign groundworkers: N/A, N/A 
+    and office workers: 715-16-1171, N/A to it*/
+BEGIN;
+UPDATE officeshift 
+SET ground_worker_1 = 'N/A', ground_worker_2 = 'N/A', office_worker_1 = '715-16-1171', office_worker_2 = 'N/A'
+WHERE shift_id = 37;
+COMMIT;
+/*Update shiftid: 1 and assign groundworkers: N/A, 462-75-3491 
+    and office workers: N/A, N/A to it*/
+BEGIN;
+UPDATE officeshift 
+SET ground_worker_1 = 'N/A', ground_worker_2 = '462-75-3491', office_worker_1 = 'N/A', office_worker_2 = 'N/A'
+WHERE shift_id = 1;
+COMMIT;
+/*Update the normal hours, overtime hours, taxes and monthly salary in the payment table for employees: 462-75-3491, 749-29-6226, 715-16-1171*/
+BEGIN;
+Update payment
+SET normal_hours = CASE social_security_num
+                     WHEN '462-75-3491' THEN 8
+                     WHEN '749-29-6226' THEN 8
+                     WHEN '715-16-1171' THEN 8
+                   END,
+    overtime_hours = CASE social_security_num
+                     WHEN '462-75-3491' THEN 0
+                     WHEN '749-29-6226' THEN 0
+                     WHEN '715-16-1171' THEN 0
+                   END,
+    taxes = CASE social_security_num
+                     WHEN '462-75-3491' THEN 56.00
+                     WHEN '749-29-6226' THEN 67.20
+                     WHEN '715-16-1171' THEN 67.20
+                   END,
+    monthly_salary = CASE social_security_num
+                     WHEN '462-75-3491' THEN 144.00
+                     WHEN '749-29-6226' THEN 172.80
+                     WHEN '715-16-1171' THEN 172.80
+                   END
+WHERE social_security_num IN ('462-75-3491', '749-29-6226', '715-16-1171');
+COMMIT;
+/*Update the normal hours, overtime hours, taxes and monthly salary in the payment table for employees: 462-75-3491, 749-29-6226, 715-16-1171*/
+BEGIN;
+Update payment
+SET normal_hours = CASE social_security_num
+                     WHEN '462-75-3491' THEN 8
+                     WHEN '749-29-6226' THEN 8
+                     WHEN '715-16-1171' THEN 8
+                   END,
+    overtime_hours = CASE social_security_num
+                     WHEN '462-75-3491' THEN 0
+                     WHEN '749-29-6226' THEN 0
+                     WHEN '715-16-1171' THEN 0
+                   END,
+    taxes = CASE social_security_num
+                     WHEN '462-75-3491' THEN 56.00
+                     WHEN '749-29-6226' THEN 67.20
+                     WHEN '715-16-1171' THEN 67.20
+                   END,
+    monthly_salary = CASE social_security_num
+                     WHEN '462-75-3491' THEN 144.00
+                     WHEN '749-29-6226' THEN 172.80
+                     WHEN '715-16-1171' THEN 172.80
+                   END
+WHERE social_security_num IN ('462-75-3491', '749-29-6226', '715-16-1171');
+COMMIT;
