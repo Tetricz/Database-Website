@@ -333,6 +333,28 @@ app.post("/reset", async (req, res) => {
   }
 });
 
+app.get('/query.sql', function(req, res) {
+  res.sendFile(__dirname + '/query.sql')
+});
+
+app.get('/text_query', function(req, res){
+  var fs = require('fs');
+  var text = fs.readFileSync('./query.sql').toString().replace(/\n/g, '<br>')
+  res.send(`<head><link rel="stylesheet" href="resource://content-accessible/plaintext.css">
+  <title>Transactions</title></head><sql>${text}</sql>`)
+});
+
+app.get('/transaction.sql', function(req, res) {
+  res.sendFile(__dirname + '/transaction.sql')
+});
+
+app.get('/text_transaction', function(req, res){
+  var fs = require('fs');
+  var text = fs.readFileSync('./transaction.sql').toString().replace(/\n/g, '<br>')
+  res.send(`<head><link rel="stylesheet" href="resource://content-accessible/plaintext.css">
+  <title>Transactions</title></head><sql>${text}</sql>`)
+});
+
 app.get('/officeshift', function(req, res) {
   res.sendFile(__dirname + '/public/officeshift.html')
 });
