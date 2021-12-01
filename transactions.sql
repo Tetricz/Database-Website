@@ -1,25 +1,45 @@
 BEGIN;
-UPDATE flightassignment SET pilot = '500-79-5396', copilot = '545-56-1535', flight_attendant_1 = 'N/A', flight_attendant_2 = 'N/A', 
-flight_attendant_3 = 'N/A', flight_attendant_4 = 'N/A'
-WHERE flight_id LIKE '01_';
+UPDATE employee
+SET first_name = '1', last_name = 'Laurence', email = 'alaurence9@g.co', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
 COMMIT;
 BEGIN;
-Update payment
-SET normal_hours = CASE social_security_num
-                     WHEN '500-79-5396' THEN 26
-                     WHEN '545-56-1535' THEN 26
-                   END,
-    overtime_hours = CASE social_security_num
-                     WHEN '500-79-5396' THEN 0
-                     WHEN '545-56-1535' THEN 0
-                   END,
-    taxes = CASE social_security_num
-                     WHEN '500-79-5396' THEN 509.60
-                     WHEN '545-56-1535' THEN 473.20
-                   END,
-    monthly_salary = CASE social_security_num
-                     WHEN '500-79-5396' THEN 1310.40
-                     WHEN '545-56-1535' THEN 1216.80
-                   END
-WHERE social_security_num IN ('500-79-5396', '545-56-1535');
+UPDATE employee
+SET first_name = '1', last_name = 'Laurence', email = 'alaurence9@g.co', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = '1', last_name = 'Laurence', email = 'alaurence9', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = '1', last_name = 'Laurence', email = 'alaurence9', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = '1', last_name = 'Laurence', email = 'alaurence9@gmail.com', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = 'Abby', last_name = 'Laurence', email = 'alaurence9@gmail.com', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = 'Abby', last_name = 'Laurence', email = 'alaurence9@gmail.com', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = 'Abby', last_name = 'Laurence', email = 'alaurence9@gmailcom', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
+COMMIT;
+BEGIN;
+UPDATE employee
+SET first_name = 'Abby', last_name = 'Laurence', email = 'alaurence9', street_num = '5542', city = 'Sao Paulo', country = 'Brazil'
+WHERE social_security_num = '500-79-5396';
 COMMIT;

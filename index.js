@@ -270,17 +270,17 @@ async function paymentupdate (payments) {
 app.put("/employee_info/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, email, gender, street_address, city, country} = req.body;
+    const { first_name, last_name, email, street_address, city, country} = req.body;
     transactionquery =
 `UPDATE employee
-SET first_name = '${first_name}', last_name = '${last_name}', email = '${email}', gender = '${gender}', street_num = '${street_address}', city = '${city}', country = '${country}'
+SET first_name = '${first_name}', last_name = '${last_name}', email = '${email}', street_num = '${street_address}', city = '${city}', country = '${country}'
 WHERE social_security_num = '${id}';`
     await pool.query('BEGIN')
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
     appendtofile (transactions, transactionquery)
-    res.json({first_name, last_name, email, gender, street_address, city, country})
+    res.json({first_name, last_name, email, street_address, city, country})
   } catch (err) {
     console.error(err.message);
   }
