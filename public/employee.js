@@ -11,7 +11,6 @@ const editDemo = (id) => {
   document.querySelector('#edited-first-name').value = document.querySelector(`#firstname${id}`).innerHTML;
   document.querySelector('#edited-last-name').value = document.querySelector(`#lastname${id}`).innerHTML;
   document.querySelector('#edited-email').value = document.querySelector(`#email${id}`).innerHTML;
-  document.querySelector('#edited-gender').value = document.querySelector(`#gender${id}`).innerHTML;
   document.querySelector('#edited-street-address').value = document.querySelector(`#streetaddress${id}`).innerHTML;
   document.querySelector('#edited-city').value = document.querySelector(`#city${id}`).innerHTML;
   document.querySelector('#edited-country').value = document.querySelector(`#country${id}`).innerHTML;
