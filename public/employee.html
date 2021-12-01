@@ -84,7 +84,15 @@
           </th>
           <th><input id = "new-address" type="text" class="form-control" placeholder= "Address"></th>
           <th><input id = "new-city" type="text" class="form-control" placeholder= "City"></th>
-          <th><input id = "new-country" type="text" class="form-control" placeholder= "Country"></th>
+          <th>
+            <select id="new-country" class="form-select" aria-label="Default select example">
+              <option value="Brazil">Brazil</option>
+              <option value="United States">United States</option>
+              <option value="China">China</option>
+              <option value="Australia">Australia</option>
+              <option value="France">France</option>
+            </select>
+          </th>
           <th>
           <select id="new-job" class="form-select" aria-label="Default select example" onchange = "changebenefits()">
             <option value="pilot">pilot</option>
