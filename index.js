@@ -348,6 +348,10 @@ app.post("/reset", async (req, res) => {
   }
 });
 
+app.get('/team19.pdf', function(req, res){
+  res.sendFile(__dirname + '/team19.pdf')
+});
+
 app.get('/query.sql', function(req, res) {
   res.sendFile(__dirname + '/query.sql')
 });
