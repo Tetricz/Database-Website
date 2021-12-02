@@ -47,11 +47,24 @@ app.get('/employee_info', async(req, res)=>{
   try{
     sqlquery = 
 `SELECT social_security_num, first_name, last_name, email, gender, street_num, city, country, employee.job,
-current_airport_code, medical_benefits, retirement_benefits, travel_expenses, workers_compensation FROM employee, job 
+current_airport_code, medical_benefits, retirement_benefits, travel_expenses, workers_compensation, employee.sick_leave, employee.vacation_days FROM employee, job 
 WHERE employee.job = job.job 
 ORDER BY first_name, last_name;`;
     const allDemos = await pool.query(sqlquery);
     appendtofile(sql, `/*Selects ssn, first and last name, email, gender, street num, city, country, job, current airport code, and benefits from the employee and job tables-->*/\n` + sqlquery)
+    res.json(allDemos.rows);
+  } catch(err){
+    console.log(err.message);
+  }
+});
+
+app.get('/sickvacationdays', async(req, res)=>{
+  try{
+    sqlquery = 
+`SELECT job, sick_leave, vacation_days 
+FROM job;`;
+    const allDemos = await pool.query(sqlquery);
+    appendtofile(sql, `/*Gets the sick leave and vacation days for jobs to validate sick/leave/vacation days edited for employees-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
     console.log(err.message);
@@ -278,17 +291,18 @@ async function paymentupdate (payments) {
 app.put("/employee_info/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { first_name, last_name, email, street_address, city, country} = req.body;
+    const { first_name, last_name, email, street_address, city, country, sick_leave, vacation_days} = req.body;
     transactionquery =
 `UPDATE employee
-SET first_name = '${first_name}', last_name = '${last_name}', email = '${email}', street_num = '${street_address}', city = '${city}', country = '${country}'
+SET first_name = '${first_name}', last_name = '${last_name}', email = '${email}', street_num = '${street_address}', city = '${city}', country = '${country}',
+sick_leave = ${sick_leave}, vacation_days = ${vacation_days}
 WHERE social_security_num = '${id}';`
     await pool.query('BEGIN')
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
     appendtofile (transactions, `/*Update employee: ${id} information and change their name to: ${first_name} ${last_name}, email: ${email},
-    streetnum: ${street_address}, city: ${city} and country: ${country}*/\n` + transactionquery)
+    streetnum: ${street_address}, city: ${city}, country: ${country}, sick leave: ${sick_leave}, vacation days: ${vacation_days}*/\n` + transactionquery)
     res.json({first_name, last_name, email, street_address, city, country})
   } catch (err) {
     console.error(err.message);
@@ -297,10 +311,10 @@ WHERE social_security_num = '${id}';`
 
 app.post("/insertemployee", async (req, res) => {
   try {
-    const { id, first_name, last_name, email, gender, street_address, city, country, job, airport_code} = req.body;
+    const { id, first_name, last_name, email, gender, street_address, city, country, job, airport_code, sick_leave, vacation_days} = req.body;
     transactionquery1 =
-`INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code)
-VALUES ('${id}','${first_name}','${last_name}','${email}','${gender}','${street_address}','${city}','${country}','${job}','${airport_code}');`
+`INSERT INTO employee (social_security_num, first_name, last_name, email, gender, street_num, city, country, job, current_airport_code, sick_leave, vacation_days)
+VALUES ('${id}','${first_name}','${last_name}','${email}','${gender}','${street_address}','${city}','${country}','${job}','${airport_code}',${sick_leave},${vacation_days});`
     transactionquery2 =
 `INSERT INTO payment (social_security_num, job, normal_hours, overtime_hours, taxes, monthly_salary)
 VALUES ('${id}', '${job}', 0, 0, 0, 0);`
@@ -310,7 +324,8 @@ VALUES ('${id}', '${job}', 0, 0, 0, 0);`
     await pool.query('COMMIT')
     appendtofile (transactions, `/*Insert a new employee: ${id} into employee table with the name: ${first_name} ${last_name}, email: ${email}
     , gender: ${gender}, street address: ${street_address}, city: ${city}, country: ${country}, 
-    job: ${job}, and current airport code: ${airport_code}. We also insert this employee into payment and set their normal hours, overtime_hours,
+    job: ${job}, current airport code: ${airport_code}, sick leave: ${sick_leave}, vacation days: ${vacation_days}. We also insert this 
+    employee into payment and set their normal hours, overtime_hours,
     taxes and monthly salary to 0.*/\n` + 'BEGIN;\n' + transactionquery1 + "\n" + transactionquery2 + '\nCOMMIT;')
     res.send('Success')
   } catch (err) {

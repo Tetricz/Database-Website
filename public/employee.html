@@ -29,6 +29,15 @@
       <li class="nav-item">
         <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Demo Video</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../README.md">Read Me</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../team19.pdf">Team 19 PDF</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="">Website Demo</a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           SQL
@@ -81,6 +90,8 @@
         <th>Job</th>
         <th>Current Airport Code</th>
         <th>Benefits</th>
+        <th>Sick Leave</th>
+        <th>Vacation Days</th>
         <th>Edit</th>
       </tr>
     </thead>
@@ -127,6 +138,8 @@
           </select>
           </th>
           <th id = "new-benefits"></th>
+          <th id = "new-sickleave"></th>
+          <th id = "new-vacationdays"></th>
           <th><button class="btn btn-dark" id = "addemployee" type="button">Add</button></th>
         </form>
       </tr>
@@ -164,9 +177,13 @@
 
         <label>Country</label>
         <input type="text" class="form-control" id="edited-country" placeholder="Enter Country">
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="save-edit-demo">Save changes</button>
+
+        <label>Sick Leave Days</label>
+        <input type="text" class="form-control" id="edited-sickleave" placeholder="Enter Sick Leave Days Remaining">
+
+        <label>Vacation Days</label>
+        <input type="text" class="form-control" id="edited-vacationdays" placeholder="Enter Vacation Days Remaining">
+        <div class="modal-footer" id = "modal-buttons">
         </div>
       </div>
     </div>

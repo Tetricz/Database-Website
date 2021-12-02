@@ -13,6 +13,10 @@ const setOptions = (results) => {
 
 // function edit demo (connected with updateDemo below)
 async function editDemo (id) {
+  document.querySelector('#modal-buttons').innerHTML =
+  `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="button" class="btn btn-primary" id="save-edit-demo" onclick="updateDemo('${id}')">Save changes</button>`
+
   const flight_id = demos.filter(demo => demo.flight_id === id)[0].flight_id;
   const pilot = demos.filter(demo => demo.flight_id === id)[0].pilot; 
   const copilot = demos.filter(demo => demo.flight_id === id)[0].copilot; 
@@ -33,7 +37,6 @@ async function editDemo (id) {
   await displaySelectOptions(departure_airport, 'pilot');
   await displaySelectOptions(departure_airport, 'copilot');
   await displaySelectOptions(departure_airport, 'flight attendant');
-  document.querySelector('#save-edit-demo').addEventListener("click", function() {updateDemo(id)});
 }
 
 // function to display demos
