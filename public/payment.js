@@ -6,6 +6,22 @@ const setDemos = (data) => {
   demos = data;
 }
 
+async function viewquerysql() {
+  try {  
+    const response = await fetch("http://localhost:5000/readquerysql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+
+    const jsonData = await response.json();
+    
+    document.querySelector('#edit-demo-body').innerHTML = jsonData;
+
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 // function to display demos
 const displayDemos = () => {
   

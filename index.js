@@ -15,11 +15,15 @@ app.use(express.json());      //req.body
 
 //get = SELECT, post = INSERT, delete = DELETE, put = UPDATE
 
+let recentsql = ''
+
 //get all flightassignments
 app.get('/flightassignments', async(req, res)=>{
   try{
     sqlquery = 'SELECT * FROM flightassignment;'
     const allDemos = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}                                                                           `;
     appendtofile(sql, `/*Selects all fields from flightassignment table to display-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
@@ -35,6 +39,8 @@ app.get('/officeshifts', async(req, res)=>{
 FROM officeshift, office 
 WHERE officeshift.office_id = office_num;`
     const allDemos = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}\n`;
     appendtofile(sql, `/*Selects all fields from officeshift table and airport_code from office table to display-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
@@ -51,6 +57,8 @@ current_airport_code, medical_benefits, retirement_benefits, travel_expenses, wo
 WHERE employee.job = job.job 
 ORDER BY first_name, last_name;`;
     const allDemos = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}\n`;
     appendtofile(sql, `/*Selects ssn, first and last name, email, gender, street num, city, country, job, current airport code, and benefits from the employee and job tables-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
@@ -64,6 +72,8 @@ app.get('/sickvacationdays', async(req, res)=>{
 `SELECT job, sick_leave, vacation_days 
 FROM job;`;
     const allDemos = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}\n`;
     appendtofile(sql, `/*Gets the sick leave and vacation days for jobs to validate sick/leave/vacation days edited for employees-->*/\n` + sqlquery)
     res.json(allDemos.rows);
   } catch(err){
@@ -153,6 +163,8 @@ FROM (
       ON t1.social_security_num = t2.social_security_num
 ) AS t3;`
     const allDemos = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}\n`;
     appendtofile(sql, `/*Selects ssn, hours worked, overtime hours worked, normal payrate, overtime payrate, taxes and
     monthly salary from employee, flightassignmens, job and country tables.
     We find all the flights/office shifts assigned to a social security number, get the total hours worked, place anything worked above 40 hours as overtime,
@@ -175,6 +187,8 @@ app.get('/flightassignments/:departure_airport/:job', async(req, res)=>{
 FROM employee 
 WHERE current_airport_code = '${departure_airport}' AND job = '${job}';`
     const demo = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}\n`;
     appendtofile(sql, `/*Selects ssns to assign that have their current_airport_code the same as the flight departure airport code: ${departure_airport} and job: ${job}-->*/\n` + sqlquery)
     res.json(demo.rows);
   } catch(err){
@@ -194,6 +208,8 @@ WHERE current_airport_code =
     WHERE office_num = ${office_id}) 
     AND job = '${job}';`
     const demo = await pool.query(sqlquery);
+    recentsql = ''
+    recentsql += `${sqlquery}\n`;
     appendtofile(sql, `/*Selects ssns to assign that have their current_airport_code the same as the office id: ${office_id} airport code and job: ${job}-->*/\n` + sqlquery)
     res.json(demo.rows);
   } catch(err){
@@ -215,6 +231,8 @@ WHERE flight_id LIKE '${id}';`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+    recentsql = ''
+    recentsql += `${transactionquery}\n`;
     appendtofile(transactions, `/*Update both flights starting with flight_id: ${id} and assign pilot: ${pilot}, copilot: ${copilot}, 
     and flightattendants: ${flight_attendant_1}, ${flight_attendant_2}, ${flight_attendant_3}, ${flight_attendant_4}
     to it*/\n` + transactionquery)
@@ -238,6 +256,8 @@ WHERE shift_id = ${id};`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+    recentsql = ''
+    recentsql += `${transactionquery}\n`;
     appendtofile (transactions, `/*Update shiftid: ${id} and assign groundworkers: ${ground_worker_1}, ${ground_worker_2} 
     and office workers: ${office_worker_1}, ${office_worker_2} to it*/\n` + transactionquery)
     res.json({ground_worker_1, ground_worker_2, office_worker_1, office_worker_2})
@@ -280,6 +300,8 @@ async function paymentupdate (payments) {
           await pool.query(transactionquery);
           await pool.query('COMMIT')
           transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+          recentsql = ''
+          recentsql += `${transactionquery}\n`;
           appendtofile (transactions, `/*Update the normal hours, overtime hours, taxes and monthly salary in the payment table for employees: ${employees}*/\n` + transactionquery)
     }
   } catch (err) {
@@ -301,6 +323,8 @@ WHERE social_security_num = '${id}';`
     await pool.query(transactionquery);
     await pool.query('COMMIT')
     transactionquery = 'BEGIN;\n' + transactionquery + '\nCOMMIT;'
+    recentsql = ''
+    recentsql += `${transactionquery}\n`;
     appendtofile (transactions, `/*Update employee: ${id} information and change their name to: ${first_name} ${last_name}, email: ${email},
     streetnum: ${street_address}, city: ${city}, country: ${country}, sick leave: ${sick_leave}, vacation days: ${vacation_days}*/\n` + transactionquery)
     res.json({first_name, last_name, email, street_address, city, country})
@@ -322,6 +346,8 @@ VALUES ('${id}', '${job}', 0, 0, 0, 0);`
     await pool.query(transactionquery1);
     await pool.query(transactionquery2);
     await pool.query('COMMIT')
+    recentsql = ''
+    recentsql += 'BEGIN;\n' + transactionquery1 + "\n" + transactionquery2 + '\nCOMMIT\n;';
     appendtofile (transactions, `/*Insert a new employee: ${id} into employee table with the name: ${first_name} ${last_name}, email: ${email}
     , gender: ${gender}, street address: ${street_address}, city: ${city}, country: ${country}, 
     job: ${job}, current airport code: ${airport_code}, sick leave: ${sick_leave}, vacation days: ${vacation_days}. We also insert this 
@@ -392,6 +418,15 @@ app.get('/payment', function(req, res) {
 
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+
+app.post("/readquerysql", async (req, res) => {
+  var fs = require('fs');
+  try {
+    res.json(recentsql)
+  } catch (err) {
+    console.log(err)
+  }
 });
 
 // set up the server listening at port 5000 (the port number can be changed)
