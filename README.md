@@ -21,6 +21,7 @@ Install node modules
 ```
 npm install
 npm install nodemon
+npm install express
 ```
 
 ## Contributors
