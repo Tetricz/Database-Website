@@ -90,8 +90,8 @@ selectDemos();
 async function selectDemos() {
   // use try... catch... to catch error
   try {
-    // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch("http://localhost:5000/officeshifts")
+    // GET all demos from "/demos"
+    const response = await fetch("/officeshifts")
     // connect to heroku, remove localhost:port
     // const response = await fetch("/demos")
     const jsonData = await response.json();
@@ -114,7 +114,7 @@ async function updateDemo(id) {
   // console.log(description);
 
   try {
-    // update a demo from "http://localhost:5000/demos/${id}", with "PUT" method
+    // update a demo from "/demos/${id}", with "PUT" method
     // connect to heroku, remove localhost:port
     repeatedvalue = false;
     const ground_worker_1 = document.querySelector('#edited-groundworker1').value;
@@ -145,7 +145,7 @@ async function updateDemo(id) {
     if (!repeatedvalue){
       const body = {ground_worker_1: ground_worker_1, ground_worker_2: ground_worker_2, office_worker_1: office_worker_1, office_worker_2: office_worker_2};
         
-      const response = await fetch(`http://localhost:5000/officeshifts/${id}`, {
+      const response = await fetch(`/officeshifts/${id}`, {
       // const response = await fetch(`/demos/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
@@ -172,8 +172,8 @@ async function updateDemo(id) {
 
 async function displaySelectOptions(office_id, job) {
   try {
-    // GET all demos from "http://localhost:5000/demos"
-    const response = await fetch(`http://localhost:5000/officeshifts/${office_id}/${job}`)
+    // GET all demos from "/demos"
+    const response = await fetch(`/officeshifts/${office_id}/${job}`)
     // connect to heroku, remove localhost:port
     const jsonData = await response.json();
 
