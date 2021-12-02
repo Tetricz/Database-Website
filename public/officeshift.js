@@ -13,7 +13,7 @@ const setOptions = (results) => {
 
 async function viewquerysql() {
   try {  
-    const response = await fetch("http://localhost:5000/readquerysql", {
+    const response = await fetch("/readquerysql", {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });

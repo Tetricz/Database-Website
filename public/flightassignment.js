@@ -13,7 +13,7 @@ const setOptions = (results) => {
 
 async function viewquerysql() {
   try {  
-    const response = await fetch("http://localhost:5000/readquerysql", {
+    const response = await fetch("/readquerysql", {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });
@@ -122,7 +122,7 @@ selectDemos();
 async function selectDemos() {
   // use try... catch... to catch error
   try {
-    const response = await fetch("http://localhost:5000/flightassignments")
+    const response = await fetch("/flightassignments")
     const jsonData = await response.json();
     setDemos(jsonData);
     displayDemos();
@@ -166,7 +166,7 @@ async function updateDemo(id) {
       const body = {pilot: pilot, copilot: copilot, flight_attendant_1: flight_attendant_1, flight_attendant_2: flight_attendant_2, 
         flight_attendant_3: flight_attendant_3, flight_attendant_4: flight_attendant_4};
         
-      const response = await fetch(`http://localhost:5000/flightassignments/${idtemp}`, {
+      const response = await fetch(`/flightassignments/${idtemp}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)
@@ -215,7 +215,7 @@ async function updateDemo(id) {
 
 async function displaySelectOptions(departure_airport, job) {
   try {
-    const response = await fetch(`http://localhost:5000/flightassignments/${departure_airport}/${job}`)
+    const response = await fetch(`/flightassignments/${departure_airport}/${job}`)
     const jsonData = await response.json();
 
     if (job == 'pilot'){

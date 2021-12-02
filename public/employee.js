@@ -12,7 +12,7 @@ const setDemos = (data) => {
 
 async function viewquerysql() {
   try {  
-    const response = await fetch("http://localhost:5000/readquerysql", {
+    const response = await fetch("/readquerysql", {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });
@@ -87,7 +87,7 @@ async function insertDemo (id) {
     try {
       const body = {id: id, first_name: first_name, last_name: last_name, email: email, gender: gender,
                       street_address: street_address, city: city, country: country, job: job, airport_code: airport_code, sick_leave: sick_leave, vacation_days: vacation_days};
-      const response = await fetch(`http://localhost:5000/insertemployee/`, {
+      const response = await fetch(`/insertemployee/`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)
@@ -195,7 +195,7 @@ document.querySelector('#addemployee').addEventListener("click", function() {ins
 async function selectDemos() {
   // use try... catch... to catch error
   try {
-    const response = await fetch("http://localhost:5000/employee_info")
+    const response = await fetch("/employee_info")
     const jsonData = await response.json();
 
     setDemos(jsonData);
@@ -206,7 +206,7 @@ async function selectDemos() {
     console.log(err.message);
   }
   try {
-    const response = await fetch("http://localhost:5000/sickvacationdays")
+    const response = await fetch("/sickvacationdays")
     const jsonData = await response.json();
 
     jsonData.map (days => {
@@ -307,7 +307,7 @@ async function updateDemo(id) {
     try {
       const body = {first_name: first_name, last_name: last_name, email: email,
                       street_address: street_address, city: city, country: country, sick_leave: sickleave, vacation_days: vacationdays};
-      const response = await fetch(`http://localhost:5000/employee_info/${id}`, {
+      const response = await fetch(`/employee_info/${id}`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)

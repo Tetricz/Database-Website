@@ -3,7 +3,7 @@ async function resetDB() {
   try {
     console.log('Resetting Database')
     
-    await fetch("http://localhost:5000/reset", {
+    await fetch("/reset", {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });

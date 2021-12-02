@@ -8,7 +8,7 @@ const setDemos = (data) => {
 
 async function viewquerysql() {
   try {  
-    const response = await fetch("http://localhost:5000/readquerysql", {
+    const response = await fetch("/readquerysql", {
       method: "POST",
       headers: { "Content-Type": "application/json" }
     });
@@ -52,7 +52,7 @@ selectDemos();
 
 async function selectDemos() {
   try {
-    const response = await fetch("http://localhost:5000/payments")
+    const response = await fetch("/payments")
     const jsonData = await response.json();
     setDemos(jsonData);
     displayDemos();
