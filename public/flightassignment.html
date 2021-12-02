@@ -58,6 +58,12 @@
     <h1>Assign Flight Shifts</h1>
   </div>
 
+  <div class = "p-1">
+    <div class="col-md-12 text-center">
+      <div class="btn btn-dark" id="portal1" role="button" data-toggle="modal" data-target="#edit-modal1" onclick=viewquerysql()>View Recent SQL Query</div>
+    </div>
+  </div>
+
   <!-- dynamic table to display todo list -->
   <table class="table mt-5 text-center" id="demo-list">
     <thead class="thead-dark">
@@ -111,6 +117,23 @@
         <select id="edited-flightattendant4" class="form-select" aria-label="Default select example">
         </select>
         <div id = "modal-buttons" class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of model -->
+
+  <!-- the popup modal, used for update the demo description -->
+  <div class="modal fade" id = "edit-modal1" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Recent SQL Queries</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id = "edit-demo-body" class="modal-body">
         </div>
       </div>
     </div>
